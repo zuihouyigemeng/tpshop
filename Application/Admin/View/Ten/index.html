@@ -1,0 +1,64 @@
+<extend name="Public/base"/>
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>专区</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+				<div class="header">							
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<div class="col-sm-12">
+						<div class="pull-right">
+							<button type="button" class="btn btn-success btn-rad md-trigger" url="{:U('Ten/add')}" data-modal="form-primary"><i class="fa fa-plus-square"></i> 添加专区</button>
+						</div>
+					</div>
+					<div class="category">
+						<div class="row color-primary">
+							<div class="col-sm-2 col-md-4 col-lg-1">ID</div>
+							<div class="col-sm-6 col-md-6 col-lg-8">专区名称</div>
+							<div class="col-sm-4 col-md-4 col-lg-2 text-right">操作</div>
+						</div>
+						<volist name="tree" id="list">
+					        <div class="row">
+								<div class="col-sm-2 col-md-4 col-lg-1">{$list['id']}</div>
+					            <div class="col-sm-6 col-md-6 col-lg-8">{$list.title}</div>
+					            <div class="col-sm-4 col-md-4 col-lg-2 text-right">
+					                <a data-placement="left" data-toggle="tooltip" data-original-title="修改专区" class="label label-primary md-trigger" url="{:U('Ten/edit?id='.$list['id'])}" href="#"><i class="fa fa-pencil"></i></a>
+					                <a data-placement="left" data-toggle="tooltip" data-original-title="删除专区" class="label label-danger ajax-get" href="{:U('Ten/remove?id='.$list['id'])}"><i class="fa fa-times"></i></a>
+					            </div>
+					        </div>
+						</volist>
+					</div>
+				</div>
+				<div class="md-overlay"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript">
+	$(document).ready(function(){		
+		$(".md-trigger").click(function(){
+			 if (target = $(this).attr('url')) {
+				layer.open({
+					type: 2,
+					title: false,
+					closeBtn: false,
+					area: ['600px', '520px'],
+					fix: false,
+					skin: 'layui-layer-nobg',
+					content: [target,'no']
+				});
+			}
+		})
+		highlight_subnav('{:U('Ten/index')}');
+	});
+</script>
+</block>

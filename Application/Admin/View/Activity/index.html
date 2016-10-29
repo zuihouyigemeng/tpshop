@@ -1,0 +1,70 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>活动</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+				<div class="header">
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<div class="col-sm-12">
+						<div class="pull-right">
+							<a class="btn btn-success" href="{:U('add')}" ><i class="fa fa-plus-square"></i> 添加活动</a>
+						</div>
+					</div>
+					<table class="no-border blue">
+						<thead class="no-border">
+						<tr>
+							<th style="width:30%;">标识</th>
+							<th style="width:30%;">名称</th>
+							<th style="width:15%;">类型</th>
+							<th style="width:10%;">状态</th>
+							<th class="text-right">操作</th>
+						</tr>
+						</thead>
+						<notempty name="_list">
+						<tbody class="no-border-y">
+						<volist name="_list" id="vo">
+						<tr>
+							<td>{$vo['name']}</td>
+							<td><a href="{:U('edit?id='.$vo['id'])}">{$vo['title']}</a></td>
+							<td>{:get_activity_type($vo['type'])}</td>
+							<td>{:show_status_op(abs(1-$vo['status']))}</td>
+							<td class="text-right">
+								<a data-placement="left" data-toggle="tooltip" data-original-title="修改" class="label label-primary" href="{:U('edit?id='.$vo['id'])}"><i class="fa fa-pencil"></i></a>
+								<a id="status" data-placement="left" data-toggle="tooltip" data-original-title="状态" class="label <eq name="vo.status" value="0">label-default<else/>label-success</eq> no-refresh ajax-get" href="{:U('setStatus?Model=activity&id='.$vo['id'].'&status='.abs(1-$vo['status']))}"><i class="fa <eq name="vo.status" value="0">fa-eye-slash<else/>fa-eye</eq>"></i></a>
+								<a data-placement="left" data-toggle="tooltip" data-original-title="删除" class="label label-danger ajax-get" href="{:U('del?id='.$vo['id'])}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						</volist>
+						</tbody>
+						<else/>
+						<td colspan="6"> aOh! 暂时还没有内容! </td>
+						</notempty>				
+					</table>
+					<div class="content col-lg-12 pull-left">
+                        <div class="panel-foot text-center">
+                            <div class="page">{$_page}</div>
+                        </div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</block>
+<block name="script">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			highlight_subnav('{:U('Activity/index')}');
+		});
+	</script>
+</block>

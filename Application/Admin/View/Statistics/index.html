@@ -1,0 +1,76 @@
+<extend name="Public/base"/>
+<block name="style">
+	<css href="__JS__/bootstrap.datetimepicker/css/bootstrap-datetimepicker.min.css" />
+</block>
+
+<block name="body">
+	<div class="page-head">
+		<h2>统计</h2>
+	</div>
+	<div class="cl-mcont">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="block-flat">
+					<div class="header">							
+						<h3 class="hthin">{$meta_title}</h3>
+					</div>
+					<div class="content">
+						<div class="col-sm-12">
+							<form action="{:U()}" class="form-horizontal"  method="post">
+							<label class="pull-left control-label">开始日期</label>
+							<div class="col-sm-3">
+								<div class="input-group date starttime" data-min-view="2" data-date-format="yyyy-mm-dd">
+									<input type="text" name="starttime" class="form-control" value="{$Think.post.starttime|default=time_format(NOW_TIME-24*60*60*30,'Y-m-d')}"/>
+									<span class="input-group-addon btn btn-primary"><span class="glyphicon glyphicon-th"></span></span>
+								</div>
+							</div>
+							<label class="pull-left control-label">结束日期</label>
+							<div class="col-sm-3">
+								<div class="input-group date endtime" data-min-view="2" data-date-format="yyyy-mm-dd">
+									<input type="text" name="endtime" class="form-control" value="{$Think.post.endtime|default=time_format(NOW_TIME,'Y-m-d')}"/>
+									<span class="input-group-addon btn btn-primary"><span class="glyphicon glyphicon-th"></span></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<button type="submit" class="btn btn-success">确认</button>
+							</div>
+							</form>
+						</div>	
+						<table class="no-border blue">
+							<thead class="no-border">
+								<tr>
+									<th>日期</th>
+									<th>共计</th>
+									<th>支出</th>
+									<th>奖励</th>
+									<th>实际</th>
+								</tr>
+							</thead>
+							<tbody class="no-border-y">
+								<volist name="income" id="vo">
+								<tr>
+									<td>{$vo['time']}</td>
+									<td>￥{$vo['price']|default=0}</td>
+									<td>￥{$vo['buy_price']|default=0}</td>
+									<td>￥{$vo['payment']|default=0}</td>
+									<td>￥{$vo['price']-$vo['buy_price']-$vo['payment']}</td>
+								</tr>
+								</volist>
+							</tbody>
+						</table>							
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+</block>
+<block name="script">
+	<js href="__JS__/bootstrap.datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".starttime").datetimepicker({autoclose: true,language: 'zh-CN'});
+			$(".endtime").datetimepicker({autoclose: true,language: 'zh-CN'});
+			highlight_subnav('{:U('Statistics/index')}');
+		})
+	</script>
+</block>

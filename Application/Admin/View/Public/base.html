@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="{:C('WEB_SITE_KEYWORD')}" name="keywords">
+	<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}">
+	<link rel="shortcut icon" href="__IMG__/favicon.png">
+	<title>{:C('WEB_SITE_TITLE')}--用户中</title>
+	<!-- Bootstrap core CSS -->
+	<css href="__JS__/bootstrap/dist/css/bootstrap.css" />
+	<css href="__FONTS__/font-awesome-4/css/font-awesome.min.css" />
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv-printshiv.js"></script>
+		<![endif]-->
+	<!-- Bootstrap core CSS -->
+	<css href="shop/__JS__/jquery.nanoscroller/nanoscroller.css" />
+	<css href="__JS__/jquery.select2/select2.css" />
+	<css href="__JS__/bootstrap.slider/css/slider.css" />
+	<css href="__CSS__/pygments.css" />
+	<!-- Custom styles for this template -->
+	<css href="__CSS__/style.css" />
+	<block name="style"></block>
+</head>
+<body>
+<!-- Fixed navbar -->
+<div id="head-nav" class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="fa fa-gear"></span> </button>
+			<a class="navbar-brand" href="#"><span>综合管理后台</span></a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<volist name="__MENU__.main" id="menu">
+                <li class="{$menu.class|default=''}"><a href="{$menu.url|U}">{$menu.title}</a></li>
+            	</volist>
+			</ul>
+			<ul class="nav navbar-nav navbar-right user-nav">
+				<li class="dropdown profile_menu"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-2x"></i> <span>{:session('user_auth.username')}</span> <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="{:U('Member/password')}">修改密码</a></li>
+						<li class="divider"></li>
+						<li><a href="{:U('public/logout')}">退出</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="cl-wrapper" class="fixed-menu">
+	<div class="cl-sidebar">
+		<div class="cl-toggle"><i class="fa fa-bars"></i></div>
+		<div class="cl-navblock">
+			<div class="menu-space">
+				<div class="content">
+					<!-- 子导航 -->
+					<block name="sidebar">
+						<ul class="cl-vnavigation">
+						<volist name="__MENU__.child" id="sub_menu">
+							<notempty name="sub_menu">
+								<gt name="sub_menu|count" value="1">
+									<li><a href="#"><i class="{$sub_menu[0]['icon']}"></i><span>{$key}</span></a>
+										<ul class="sub-menu">
+								</gt>
+								<volist name="sub_menu" id="menu">
+
+									<li><a href="{$menu.url|U}"><eq name="sub_menu|count" value="1"><i class="{$menu.icon}"></i><span></eq>{$menu.title}<eq name="sub_menu|count" value="1"></span></eq></a></li>
+								</volist>
+								<gt name="sub_menu|count" value="1">
+										</ul>
+									</li>
+								</gt>
+							</notempty>
+						</volist>
+						</ul>
+					</block>
+					<!-- /子导航 -->
+				</div>
+			</div>
+			<div class="text-right collapse-button" style="padding:7px 9px;">
+				<button id="sidebar-collapse" class="btn btn-default" style=""><i style="color:#fff;" class="fa fa-angle-left"></i></button>
+			</div>
+		</div>
+	</div>
+	<block name="body"></block>
+</div>
+<js href="__JS__/jquery.js" />
+<js href="__JS__/jquery.ui/jquery-ui.js" />
+<js href="__JS__/jquery.nanoscroller/jquery.nanoscroller.js" />
+<js href="__JS__/bootstrap.switch/bootstrap-switch.min.js" />
+<js href="__JS__/bootstrap.datetimepicker/js/bootstrap-datetimepicker.min.js" />
+<js href="__JS__/jquery.select2/select2.min.js" />
+<js href="__STATIC__/layer/layer.js" />
+<js href="__JS__/behaviour/web.js" />
+<js href="__JS__/bootstrap/dist/js/bootstrap.min.js" />
+<block name="script"></block>
+</body>
+</html>

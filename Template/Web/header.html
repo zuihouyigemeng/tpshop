@@ -1,0 +1,55 @@
+<!--[if lt IE 9]>
+  	<div class="chrome">您的浏览器版本太低啦~请升级您的浏览器。本站推荐<a href="http://liulanqi.baidu.com/" class="a1" target="_blank">百度浏览器</a> <a href="http://liulanqi.baidu.com/" class="a1" target="_blank">点击下载</a></div>
+<![endif]-->
+<div class="top-line">
+	<div class="g-wrap">
+		<div class="tl-left">欢迎来到{$web_title}！</div>
+		<div class="tl-right">
+			<present name="Think.session.user_auth">
+			<a href="{:U('user/index')}">{$username}</a> 
+			<a href="{:U('user/index')}">我的夺宝</a>
+			<a href="{:U('public/logout')}">[ 退出 ]</a>
+			<else/>
+			<a href="{:U('public/login')}">请登录</a> 
+			<a href="{:U('public/reg')}">免费注册</a>
+			</present>
+		</div>
+	</div>
+</div>
+<div class="top-back">
+	<!-- LOGO 开始 -->
+  	<div class="container">
+		<div class="logos">
+			<div class="logo"><img src="{$web_logo}" /></div>
+			<div class="top-people"></div>
+		</div>
+  	</div>
+	<!-- LOGO 结束 -->
+	<!-- 导航开始 -->
+	<div class="navbar category">
+		<div class="container sNav">
+			<div class="navbar-all-class class-hidden">
+  				<a href="#">全部商品分类</a>
+  				<div class="left-class left-cl-hidden">
+	  				<a href="{:U('list/index/')}"><span class="icon icon-star-empty"></span>全部商品</a>
+	  				<volist name=":R('list/type')" id="vo">
+						<a href="{:U('list/index/?id='.$vo['id'])}"><span class="{$vo['icon']}"></span>{$vo['title']}</a>
+					</volist>
+				</div>
+  			</div>
+			<div class="navbar-class"><a href="{:U('index/index')}">首页</a></div>
+			<div class="navbar-class"><a href="{:U('user/announced')}">最新揭晓</a></div>
+			<volist name=":R('ten/ten')" id="vo">
+                <div class="navbar-class"><a href="{:U('ten/index',array('ten'=>$vo['id']))}">{$vo['title']}</a></div>
+            </volist>
+			<div class="navbar-class"><a href="{:U('user/displays')}">晒单分享</a></div>
+			<div class="navbar-class navbar-message"><a href="{:U('activity/index')}">发现</a></div>
+			<div class="navbar-class"><a href="{:U('user/guide')}">新手引导</a></div>
+			<present name="Think.get.wid">
+				<notempty name="menu_url">
+					<div class="navbar-class"><a href="{$menu_url}">{$menu_name}</a></div>
+				</notempty>
+			</present>
+		</div>
+	</div>
+</div>

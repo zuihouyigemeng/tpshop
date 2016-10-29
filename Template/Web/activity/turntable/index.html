@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>{$info['title']} - {$web_title}</title>
+    <link href="{$web_tplpath}css/oenpay.css" rel="stylesheet">
+    <link href="{$web_tplpath}activity/turntable/css/style.css" rel="stylesheet">
+    <!--[if lt IE 8]>
+	<style type="text/css">
+		.searchs {float:left;width:620px}
+		.searchs>form {float:left;width:608px;height:35px;display:block}
+		.searchs>.hot-search {float:left;display:block;width:608px}
+	</style>
+	<![endif]-->
+  </head>
+  <body>
+  <include file="{$web_tplpath}header.html" />
+    
+	<form id="form" method="POST">
+	    <div class="banner1"></div>
+        <!--活动规则-->
+        <div class="rule">
+        	<div class="cent">
+	            <!--转盘-->
+	            <img src="{$web_tplpath}activity/turntable/images/1.png" id="shan-img" style="display:none;" />
+			    <img src="{$web_tplpath}activity/turntable/images/2.png" id="sorry-img" style="display:none;" />
+				<div class="banner">
+					<div class="turnplate" style="background-image:url({$web_tplpath}activity/turntable/images/turnplate-bg.png);background-size:100% 100%;">
+						<canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
+						<img class="pointer" src="{$web_tplpath}activity/turntable/images/turnplate-pointer.png"/>
+					</div>
+				</div>
+			</div>
+        	<div class="tip">
+	                <p>每日登录就有1次抽奖机会</p>
+					<present name="Think.session.user_auth">
+					<p>您当前拥有<em><label id="integral">{:R('activity/turntable_num')}</label></em> 次机会</p>
+					<else/>
+					<p id="LoginStatus0"><a href="{:U('public/login')}" style="color:#F7FFB6">您好请先登录</a></p>
+					</present>
+					<ul class="redme">
+						<li class="text">分享到：</li>
+						<li class="bdsharebuttonbox">
+							<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+							<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+							<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+							<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+							<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+						</li>
+					</ul>
+	            </div>
+            <h2 class="title h68 auto">活动规则</h2>
+            <div class="content">
+                <div class="mode rule1">
+                    <h3>活动时间：</h3>
+                    <p>
+                        <span>{:time_format($info['end_time'],"Y-m-d")}截止</span>
+                    </p>
+                </div>
+                <div class="mode rule2">
+                    <h3>活动规则：</h3>
+                    <p>
+                        <span>1、会员必须<em>登录成功</em>后才可进行转盘抽奖活动；</span><br />
+                        <span>2、每位会员每天<em>只有一次抽奖机会</em>；</span><br />
+                        <span>3、活动中奖结果均以系统自动下发的中奖通知为准；</span><br />
+                        <span>4、<em>中奖以后，系统会自动将{$web_currency}发送至您的余额中</em>；</span>
+                    </p>
+                </div>
+                <div class="mode rule4">
+                    <h3>注意事项：</h3>
+                    <p>
+                        <span>1、禁止任何不正当手段及舞弊行为参与活动，一经发现，活动发起人有权取消用户的获奖资格；</span><br />
+                        <span>2、本次活动最终解释权归{$web_title}网所有！</span><br />
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div class="last_content"> 
+            <!--获奖名单-->
+            <div class="win_list">
+                <div class="winner" id="win1">
+                    <ul>
+                        <volist name=":R('Activity/turntable_list')" id="list">
+							<li>{:str_replace('欢乐币',$web_currency,$list['remark'])}</li>
+						</volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+<div class="clear"></div>
+<include file="{$web_tplpath}footer.html" />
+<script src="{$web_tplpath}js/jquery.min.js"></script>
+<script src="{$web_tplpath}activity/turntable/js/awardRotate.js"></script>
+<script src="__STATIC__/layer/layer.js"></script>
+<script type="text/javascript">
+var turnplate={
+		restaraunts:[],				//大转盘奖品名称
+		colors:[],					//大转盘奖品区块对应背景颜色
+		outsideRadius:192,			//大转盘外圆的半径
+		textRadius:155,				//大转盘奖品位置距离圆心的距离
+		insideRadius:68,			//大转盘内圆的半径
+		startAngle:0,				//开始角度
+		bRotate:false				//false:停止;ture:旋转
+},uid={$Think.UID},getTurntable=0;
+
+$(document).ready(function(){
+	//动态添加大转盘的奖品与奖品区域背景颜色
+	turnplate.restaraunts = ["100{$web_currency}", "50{$web_currency}", "谢谢参与", "10{$web_currency}", "1{$web_currency}", "20{$web_currency}", "谢谢参与", "1{$web_currency}", "3{$web_currency}", "谢谢参与"];
+	turnplate.colors = ["#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF"];
+
+	//旋转转盘 item:奖品位置; txt：提示语;
+	var rotateFn = function (item, txt){
+		var angles = item * (360 / turnplate.restaraunts.length) - (360 / (turnplate.restaraunts.length*2));
+		if(angles<270){
+			angles = 270 - angles; 
+		}else{
+			angles = 360 - angles + 270;
+		}
+		$('#wheelcanvas').stopRotate();
+		$('#wheelcanvas').rotate({
+			angle:0,
+			animateTo:angles+1800,
+			duration:8000,
+			callback:function (){
+				if(txt.indexOf("{$web_currency}")>0){
+					layer.msg(txt, {icon: 6,time:0 ,btn: ['了解玩法', '马上夺宝', '知道了'],
+						yes: function(index, layero){
+							location.href = "{:U('user/guide')}";
+					    },cancel: function(index){
+					        location.href = "{:U('index/index')}";
+					    },btn3: function(index, layero){
+					        layer.close(index);
+					    }
+					});
+				}else{
+					layer.msg(txt, {icon: 5});
+				}
+				turnplate.bRotate = !turnplate.bRotate;
+			}
+		});
+	};
+
+	$('.pointer').click(function (){
+		if(!uid){
+			layer.msg('请先登录！', {icon: 5});
+			return ;
+		}
+		if(turnplate.bRotate)return;
+		turnplate.bRotate = !turnplate.bRotate;
+		$.get("{:U('activity/getPrize')}",function(item){
+			if(item.turntable>0){
+				$('#integral').html(parseInt($('#integral').html())-1);
+				rotateFn(item['v']+1, turnplate.restaraunts[item['v']]);
+			}else{
+				layer.msg('您今天的配额已经使用完！分享好友可获得更多配额！', {icon: 5});
+				turnplate.bRotate = !turnplate.bRotate;
+			}
+		});
+	});
+
+	$('[data-cmd]').click(function(){
+		if(getTurntable<1){
+			$.ajax("{:U('activity/getTurntable')}").success(function(data){
+				getTurntable=1;
+				$('#integral').html(parseInt($('#integral').html())+1);
+			});	
+		}
+	})
+
+	var text="1元就买了个腰子6，不信你就往前走，别回头。只要1元，进来了就不后悔，进来了就不上当。大到家用电器，小到针头线脑一律只要1元。1元就能实现梦想，走向人生巅峰迎娶百富美。";
+	window._bd_share_config={"common":{"bdText":text,"bdDesc":text,"bdUrl":"{$web_url}/activity/content/id/57/uid/"+uid,"bdPic":"{$web_url}/wx-logo.png","bdSnsKey":{},"bdMini":"1","bdMiniList":false,"bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+});
+
+//页面所有元素加载完毕后执行drawRouletteWheel()方法对转盘进行渲染
+window.onload=function(){
+	drawRouletteWheel();
+};
+
+function drawRouletteWheel() {    
+  var canvas = document.getElementById("wheelcanvas");    
+  if (canvas.getContext) {
+	  //根据奖品个数计算圆周角度
+	  var arc = Math.PI / (turnplate.restaraunts.length/2);
+	  var ctx = canvas.getContext("2d");
+	  //在给定矩形内清空一个矩形
+	  ctx.clearRect(0,0,422,422);
+	  //strokeStyle 属性设置或返回用于笔触的颜色、渐变或模式  
+	  ctx.strokeStyle = "#FFBE04";
+	  //font 属性设置或返回画布上文本内容的当前字体属性
+	  ctx.font = '16px Microsoft YaHei';      
+	  for(var i = 0; i < turnplate.restaraunts.length; i++) {       
+		  var angle = turnplate.startAngle + i * arc;
+		  ctx.fillStyle = turnplate.colors[i];
+		  ctx.beginPath();
+		  //arc(x,y,r,起始角,结束角,绘制方向) 方法创建弧/曲线（用于创建圆或部分圆）    
+		  ctx.arc(211, 211, turnplate.outsideRadius, angle, angle + arc, false);    
+		  ctx.arc(211, 211, turnplate.insideRadius, angle + arc, angle, true);
+		  ctx.stroke();  
+		  ctx.fill();
+		  //锁画布(为了保存之前的画布状态)
+		  ctx.save();   
+		  
+		  //----绘制奖品开始----
+		  ctx.fillStyle = "#E5302F";
+		  var text = turnplate.restaraunts[i];
+		  var line_height = 17;
+		  //translate方法重新映射画布上的 (0,0) 位置
+		  ctx.translate(211 + Math.cos(angle + arc / 2) * turnplate.textRadius, 211 + Math.sin(angle + arc / 2) * turnplate.textRadius);
+		  
+		  //rotate方法旋转当前的绘图
+		  ctx.rotate(angle + arc / 2 + Math.PI / 2);
+		  
+		  /** 下面代码根据奖品类型、奖品名称长度渲染不同效果，如字体、颜色、图片效果。(具体根据实际情况改变) **/
+		  if(text.indexOf("M")>0){
+			  var texts = text.split("M");
+			  for(var j = 0; j<texts.length; j++){
+				  ctx.font = j == 0?'bold 20px Microsoft YaHei':'16px Microsoft YaHei';
+				  if(j == 0){
+					  ctx.fillText(texts[j]+"M", -ctx.measureText(texts[j]+"M").width / 2, j * line_height);
+				  }else{
+					  ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
+				  }
+			  }
+		  }else if(text.indexOf("M") == -1 && text.length>6){
+			  text = text.substring(0,6)+"||"+text.substring(6);
+			  var texts = text.split("||");
+			  for(var j = 0; j<texts.length; j++){
+				  ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
+			  }
+		  }else{
+			  //在画布上绘制填色的文本。文本的默认颜色是黑色
+			  //measureText()方法返回包含一个对象，该对象包含以像素计的指定字体宽度
+			  ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+		  }
+		  
+		  //添加对应图标
+		  if(text.indexOf("{$web_currency}")>0){
+			  var img= document.getElementById("shan-img");
+			  img.onload=function(){  
+				  ctx.drawImage(img,-15,10);      
+			  }; 
+			  ctx.drawImage(img,-15,10);  
+		  }else if(text.indexOf("谢谢参与")>=0){
+			  var img= document.getElementById("sorry-img");
+			  img.onload=function(){  
+				  ctx.drawImage(img,-15,10);      
+			  };  
+			  ctx.drawImage(img,-15,10);  
+		  }
+		  //把当前画布返回（调整）到上一个save()状态之前 
+		  ctx.restore();
+		  //----绘制奖品结束----
+	  }     
+  } 
+}
+ function startmarquee(lh, speed, delay, index) {
+    var t;
+    var p = false;
+    var o = document.getElementById("win" + index);
+    o.innerHTML += o.innerHTML;
+    o.onmouseover = function () { p = true; };
+    o.onmouseout = function () { p = false; };
+    o.scrollTop = 0;
+    function start() {
+        t = setInterval(scrolling, speed);
+        if (!p) { o.scrollTop += 1; }
+    }
+    function scrolling() {
+        if (o.scrollTop % lh != 0) {
+            o.scrollTop += 1;
+            if (o.scrollTop >= o.scrollHeight / 2) o.scrollTop = 0;
+        } else {
+            clearInterval(t);
+            setTimeout(start, delay);
+        }
+    }
+    setTimeout(start, delay);
+}
+startmarquee(40, 40, 1000, 1);
+</script>
+<present name="Think.get.wid">
+	<script src="__STATIC__/qrcode.min.js"></script>
+	<script type="text/javascript">
+		$('.qrcodes').qrcode("http://www.1yuanjiang.com?wid={$Think.get.wid}");
+	</script>
+</present>
+</body>
+</html>

@@ -1,0 +1,1 @@
+$.fn.LoadImage=function(a){return this.each(function(){var b=$(this),c=$(this).attr("src"),d=new Image;d.src=c,$(this).attr("src","");var e=$('<img alt="\u52a0\u8f7d\u4e2d..." title="\u56fe\u7247\u52a0\u8f7d\u4e2d..." src="'+a+'" />');b.hide(),b.after(e),$(d).load(function(){e.remove(),b.attr("src",this.src),b.show()})})};

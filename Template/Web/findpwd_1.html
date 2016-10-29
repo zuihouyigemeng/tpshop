@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>{$web_title}</title>
+    <meta name="description" content="{$web_description}" />
+    <meta name="keywords" content="{$web_keywords}" />
+    <link href="{$web_tplpath}css/oenpay.css" rel="stylesheet">
+    <link href="{$web_tplpath}css/login.css" rel="stylesheet">
+    <!--[if lt IE 8]>
+	<style type="text/css">
+		.searchs {float:left;width:620px}
+		.searchs>form {float:left;width:608px;height:35px;display:block}
+		.searchs>.hot-search {float:left;display:block;width:608px}
+	</style>
+	<![endif]-->
+  </head>
+  <body>
+  	<include file="{$web_tplpath}header.html" />
+	<div class="cent margin">
+		<!-- 分步显示开始 -->			
+		<div class="step">
+			<ul class="active"> <i>1</i>
+				<li></li> <b></b>
+				<small>填写账户名</small>
+			</ul>
+			<ul> <i>2</i>
+				<li></li> <b></b>
+				<small>验证身份</small>
+			</ul>
+			<ul>
+				<i>3</i>
+				<li></li>
+				<b></b>
+				<small>设置新密码</small>
+			</ul>
+			<ul>
+				<i>4</i>
+				<li></li>
+				<b></b>
+				<small>完成</small>
+			</ul>
+			<span></span>
+		</div>
+		<!-- 分步显示结束 -->
+		<form method="post" action="{:U()}" class="form-user" class="form-user">		
+		<div class="input-lse">
+			<label>账户名：</label>
+			<input type="text" name="username"/>	
+		</div>
+		<div class="input-lse">
+			<label>验证码：</label>
+			<input type="text" name="passcode"/>		
+			<span class="yzmimg"><img src="{:U('Public/verify')}" class="passcode" /></span>
+		</div>
+		<div class="input-lse">
+			<label></label>
+			<button class="btn btn-yellow ajax-post" type="submit" target-form="form-user">提交</button>
+		</div>
+		</form>
+    </div>
+	<div class="clear"></div>
+  	<include file="{$web_tplpath}footer.html" />
+	<script src="{$web_tplpath}js/jquery.min.js"></script>
+	<script type="text/javascript">var tplpath='{$web_tplpath}'</script>
+	<script src="__STATIC__/layer/layer.js"></script>
+	<script src="{$web_tplpath}js/ajax.js"></script>
+	<script src="{$web_tplpath}js/public.js"></script>
+	<!--[if lt IE 9]>
+	<script src="j{$web_tplpath}s/jquery.pseudo.js"></script>
+	<![endif]-->
+  </body>
+</html>

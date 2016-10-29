@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" href="__IMG__/favicon.png">
+	<title>{$webtitle}--忘记密码</title>
+	<!-- Bootstrap core CSS -->
+	<css href="__JS__/bootstrap/dist/css/bootstrap.css" />
+    <css href="__FONTS__/font-awesome-4/css/font-awesome.min.css" />
+	<!-- Custom styles for this template -->
+	<css href="__CSS__/style.css" />
+</head>
+<body class="texture">
+<div id="cl-wrapper" class="forgotpassword-container">
+	<div class="middle">
+		<div class="block-flat">
+			<div class="header">							
+				<h3 class="text-center"><img class="logo-img" src="{$weblogo}" alt="logo"/>{$webtitle}</h3>
+			</div>
+			<div>
+				<form style="margin-bottom: 0px !important;" class="form-horizontal" action="{:U()}" method="post" data-parsley-validate>
+					<div class="content">
+						<h5 class="title text-center"><strong>找回密码</strong></h5>
+            			<p class="text-center">我们会发送一份重置密码的邮件到您的邮箱.</p>
+              				<hr/>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+										<input type="email" name="email" parsley-trigger="change" required placeholder="注册邮箱" class="form-control" data-parsley-errors-container="#email-error">
+									</div>
+                  					<div id="email-error"></div>
+								</div>
+							</div>
+            				<button class="btn btn-block btn-primary btn-rad btn-lg" type="submit">找回密码</button>
+					</div>
+			  </form>
+			</div>
+		</div>
+		<div class="text-center out-links"><a href="#">{$webtitle} &copy; 2014</a></div>
+	</div> 
+</div>
+<js href="__JS__/jquery.js" />
+<js href="__JS__/jquery.parsley/parsley.js" />
+<js href="__JS__/jquery.parsley/zh_cn.js" />
+<js href="__JS__/behaviour/general.js" />
+</body>
+</html>

@@ -1,0 +1,84 @@
+<extend name="Public/base"/>
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>栏目</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+				<div class="header">							
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<div class="col-sm-12">
+						<div class="pull-right">
+							<button type="button" class="btn btn-success btn-rad md-trigger" url="{:U('Category/add')}" data-modal="form-primary"><i class="fa fa-plus-square"></i> 添加主栏目</button>
+						</div>
+					</div>
+					<div class="category">
+						<div class="row color-primary">
+							<div class="col-sm-2 col-md-4 col-lg-1">ID</div>
+							<div class="col-sm-2 col-md-4 col-lg-1">折叠</div>
+							<div class="col-sm-6 col-md-6 col-lg-8">栏目名</div>
+							<div class="col-sm-4 col-md-4 col-lg-2 text-right">操作</div>
+						</div>
+						{:R('Category/tree', array($tree))} 
+					</div>
+				</div>
+				<div class="md-overlay"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript">
+	$(document).ready(function(){		
+		$(".md-trigger").click(function(){
+			 if (target = $(this).attr('url')) {
+				layer.open({
+					type: 2,
+					title: false,
+					closeBtn: false,
+					area: ['600px', '520px'],
+					fix: false,
+					skin: 'layui-layer-nobg',
+					content: [target,'no']
+				});
+			}
+		})
+		$(".md-triggers").click(function(){
+			 if (target = $(this).attr('url')) {
+				layer.open({
+					type: 2,
+					title: false,
+					closeBtn: false,
+					area: ['600px', '360px'],
+					fix: false,
+					skin: 'layui-layer-nobg',
+					content: [target,'no']
+				});
+			}
+		})
+		$(".category dd").prev().find(".fold i").addClass("fa-minus-square-o").click(function(){
+			var self = $(this);
+			if(self.hasClass("fa-minus-square-o")){
+				self.closest("dt").next().slideUp("fast", function(){
+					self.removeClass("fa-minus-square-o").addClass("fa-plus-square-o");
+				});
+			} else {
+				self.closest("dt").next().slideDown("fast", function(){
+					self.removeClass("fa-plus-square-o").addClass("fa-minus-square-o");
+				});
+			}
+		});
+		/* 三级分类删除新增按钮 */
+		$(".category dd .add-sub").remove();
+		
+		highlight_subnav('{:U('Category/index')}');
+	});
+</script>
+</block>

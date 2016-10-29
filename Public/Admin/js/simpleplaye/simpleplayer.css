@@ -1,0 +1,26 @@
+.simple-player-container {
+    display: inline-block;
+	padding: 0 10px 10px 10px;
+}
+.simple-player-container > div > ul {
+    margin: 0;
+    padding-left: 0;
+}
+.fa-play {
+    display: block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+}
+.fa-play:hover {
+	color:#FF6600;
+}
+.fa-pause {
+    display: block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+}
+.fa-pause:hover {
+	color:#FF6600;
+}

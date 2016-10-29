@@ -1,0 +1,118 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>中奖</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+				<div class="header">							
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<div class="col-sm-12">
+						<label class="pull-left control-label">产品名称(或用户ID)</label>
+						<div class="col-sm-3">
+							<input type="text" name="keyword" class="form-control">
+						</div>
+						<div class="col-sm-2">
+							<button type="button" id="search" url="{:U('index?category='.$_GET['category'])}" class="btn btn-success">搜素</button>
+						</div>
+						<div class="pull-right">
+							<div class="btn-group">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								<switch name="Think.get.express">
+									<case value="1">已发货</case>    
+									<case value="2">未发货</case>    
+									<default />所有记录
+								</switch>
+								<span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu">
+								<li><a href="{:U('index',array('type'=>I('get.type')))}">所有记录</a></li>
+								<li><a href="{:U('index',array('express'=>1,'type'=>I('get.type')))}">已发货</a></li>
+								<li><a href="{:U('index',array('express'=>2,'type'=>I('get.type')))}">未发货</a></li>
+							  </ul>
+							</div>
+							<div class="btn-group">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								<switch name="Think.get.type">
+									<case value="1">系统中奖记录</case>    
+									<case value="2">用户中奖记录</case>    
+									<default />所有中奖记录
+								</switch>
+								<span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu">
+								<li><a href="{:U('index',array('express'=>I('get.express')))}">所有中奖记录</a></li>
+								<li><a href="{:U('index',array('type'=>1,'express'=>I('get.express')))}">系统中奖记录</a></li>
+								<li><a href="{:U('index',array('type'=>2,'express'=>I('get.express')))}">用户中奖记录</a></li>
+							  </ul>
+							</div>
+						</div>
+					</div>
+					<table class="no-border blue">
+						<thead class="no-border">
+						<tr>
+							<th style="width:30%;">商品</th>
+							<th style="width:15%;">期号</th>
+							<th style="width:20%;">开奖时间</th>
+							<th style="width:10%;">开奖号码</th>
+							<th style="width:15%;">中奖用户</th>
+							<th class="text-right">操作</th>
+						</tr>
+						</thead>
+						<notempty name="_list">
+						<tbody class="no-border-y">
+						<volist name="_list" id="vo">
+						<tr>
+							<td style="width:30%;"><a href="/shop/over/id/{$vo['id']}" target="_blank">{$vo['name']}</a></td>
+							<td style="width:15%;">{$vo.no}</td>
+							<td style="width:20%;">{$vo.kaijang_time|time_format}</td>
+							<td style="width:10%;">{$vo.kaijang_num}</td>
+							<td style="width:15%;"><a class="opiframe" href="#" url="{:U('Period/user',array('uid'=>$vo['uid'],'pid'=>$vo['id']))}">{$vo.user.nickname}</a></td>
+							<td class="text-right"><a data-placement="left" data-toggle="tooltip" target="_blank" data-original-title="购买链接" class="label label-warning" href="{$vo['buy_url']}"><i class="fa fa-chain"></i></a> <a data-placement="left" data-toggle="tooltip" data-original-title="发货" class="label <present name="vo['express_no']">label-default<else />label-success</present> opiframe" href="#" url="{:U('Period/edit?id='.$vo['id'])}" id="pid_{$vo['id']}"><i class="fa fa-truck"></i></a> <a data-placement="left" data-toggle="tooltip" data-original-title="晒单" class="label <eq name="vo['shared']" value="0">label-default<else />label-primary</eq> opiframe" href="#" url="{:U('Period/shared?id='.$vo['id'])}" id="shared_{$vo['id']}"><i class="fa fa-camera-retro"></i></a></td>
+						</tr>
+						</volist>
+						</tbody>
+						<else/>
+						<td colspan="6"> aOh! 暂时还没有内容! </td>
+						</notempty>
+					</table>
+					<div class="content col-lg-12 pull-left">
+                        <div class="panel-foot text-center">
+                            <div class="page">{$_page}</div>
+                        </div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</block>
+<block name="script">
+	<js href="__JS__/behaviour/weixin.js" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			highlight_subnav('{:U('Period/index')}');
+			//搜索功能
+			$("#search").click(function(){
+				var url = $(this).attr('url');
+				var query = $(this).parents().prev().children('input').serialize();
+		        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+		        query = query.replace(/^&/g,'');
+		        if( url.indexOf('?')>0 ){
+		            url += '&' + query;
+		        }else{
+		            url += '?' + query;
+		        }
+				window.location.href = url;
+			});
+		});
+	</script>
+</block>

@@ -1,0 +1,111 @@
+<?php
+    if(C('LAYOUT_ON')) {
+        echo '{__NOLAYOUT__}';
+    }
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>跳转提示</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+        .message {
+            margin:0px auto;
+            width: 80%;
+            height: 360px;
+            margin-top: 10%;
+            padding:20px;
+            text-align: center;
+            position: relative;
+        }
+        .logo {
+          display: inline-block;
+          width: 232px;
+          height: 65px;
+        }
+        .logo img {
+          height: 65px;
+        }
+        .success {
+            width: 100%;
+            border-top: 1px dotted #ddd;
+            margin-top:20px;
+            height: 40px;
+            line-height: 40px;
+            padding-top: 20px;
+        }
+        .success h3 {
+            display: inline;
+            font-weight: initial;
+        }
+
+        @font-face {
+          font-family: 'fontello';
+          src: url('{$web_tplpath}/font/fontello.eot?85409932');
+          src: url('{$web_tplpath}/font/fontello.eot?85409932#iefix') format('embedded-opentype'),
+               url('{$web_tplpath}/font/fontello.woff?85409932') format('woff'),
+               url('{$web_tplpath}/font/fontello.ttf?85409932') format('truetype'),
+               url('{$web_tplpath}/font/fontello.svg?85409932#fontello') format('svg');
+          font-weight: normal;
+          font-style: normal;
+        }
+        i {
+            font-style: initial;
+        }
+        .icon {
+          display: inline-block;
+          font-family: 'fontello';
+          font-size: 24px;
+          line-height: 1;
+          text-decoration: none;
+
+          -webkit-font-smoothing: antialiased;
+        }
+        .icon-ok:before { content: '\e80e'; }
+        .icon-attention:before { content: '\e825'; }
+
+        .green {color:#5CB85C;}
+        .yellow {color:#F59C00;}
+    </style>
+</head>
+<body>
+
+    <div class="message">
+        <div class="logo"><img src="{$web_logo}"></div>
+        
+        <div class="success">
+            <?php if(isset($message)) {?>
+            <i class="icon icon-ok green"></i>
+            <h3><?php echo($message); ?> 正在跳转……</h3>
+            <?php }else{?>
+            <i class="icon icon-attention yellow"></i>
+            <h3><?php echo($error); ?> 正在跳转……</h3>
+            <?php }?>
+        </div>
+
+
+        <p>页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b></p>
+    </div>
+
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+</body>
+</html>

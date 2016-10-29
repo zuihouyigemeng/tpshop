@@ -1,0 +1,34 @@
+<extend name="Public/base"/>
+<block name="style"></block>
+
+<block name="body">
+	<div class="page-head">
+		<h2>系统信息</h2>
+	</div>
+	<div class="cl-mcont">
+		<div class="block-flat bars-widget">
+    	<div id="home" class="tab-pane cont active">
+        <table class="no-border no-strip information">
+          <tbody class="no-border-x no-border-y">
+            <tr>
+              <td style="width:20%;" class="category"><strong>系统信息</strong></td>
+              <td>
+                <table class="no-border no-strip skills">
+                  <tbody class="no-border-x no-border-y">
+                    <tr><td style="width:20%;"><b>操作系统：</b></td><td>{$Think.const.PHP_OS}</td></tr>
+                    <tr><td style="width:20%;"><b>运行环境：</b></td><td>{$_SERVER['SERVER_SOFTWARE']}</td></tr>
+                    <tr><td style="width:20%;"><b>MYSQL版本：</b></td><td><php>
+                        $system_info_mysql = M()->query("select version() as v;");
+                    </php>{$system_info_mysql.0.v}</td></tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</block>
+
+<block name="script"></block>

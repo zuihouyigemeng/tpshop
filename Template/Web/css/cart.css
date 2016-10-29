@@ -1,0 +1,690 @@
+@charset "utf-8";
+
+.step {
+	width: 1170px;
+	height: 70px;
+	position: relative;
+	padding: 15px 0;
+	text-align: left
+}
+
+.step span {
+	height: 2px;
+	border: 5px solid #fff;
+	position: absolute;
+	background: #DDD;
+	border-radius: 6px;
+	top: 34px;
+	left: 0;
+	right: 0;
+	display: block;
+	z-index: 1
+}
+
+.step ul {
+	display: inline-block;
+	position: relative;
+	width: 180px;
+	height: 50px;
+	list-style: none;
+	z-index: 2;
+	margin-right: -4px
+}
+
+.step ul li {
+	width: 30px;
+	height: 30px;
+	border: 10px solid #fff;
+	border-radius: 50%;
+	z-index: 3;
+	position: relative;
+	background: #ddd
+}
+
+.step ul.active li {
+	background: -webkit-gradient(linear,left top,left bottom,from(#EA7376),to(#BC3033));
+	background: -moz-linear-gradient(top,#EA7376,#BC3033);
+	background: -o-linear-gradient(top,#EA7376,#BC3033);
+	background: -ms-linear-gradient(top,#EA7376,#BC3033);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EA7376', endColorstr='#BC3033', GradientType='0')
+}
+
+.step ul i {
+	position: absolute;
+	left: 48%;
+	top: 18%;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 30px;
+	font-family: 'Open Sans Condensed',sans-serif;
+	font-style: initial;
+	color: #444;
+	z-index: 8
+}
+
+.step ul.active i {
+	color: #fff
+}
+
+.step ul b {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 24px;
+	border-bottom: 2px solid #ddd;
+	z-index: 4
+}
+
+.step ul.active b {
+	border-bottom: 2px solid #D35255
+}
+
+.step ul small {
+	position: absolute;
+	display: block;
+	bottom: -24px;
+	height: 21px;
+	font-size: 14px;
+	color: #333;
+	width: 180px;
+	text-align: center
+}
+
+.step ul.active small {
+	color: #BC3033
+}
+
+b.pay-nbs {
+	float: left
+}
+
+.pay-nbs {
+	display: inline;
+	padding: 8px;
+	margin-right: 8px
+}
+
+.pay-btn {
+	width: 1170px;
+	height: 50px;
+	margin-top: 20px;
+	text-align: right
+}
+
+.pay-readme {
+	width: 1140px;
+	margin-top: 20px;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	font-size: 14px;
+	line-height: 21px;
+	color: #666;
+	padding: 10px 15px
+}
+
+.pay-readme h3 {
+	display: block;
+	height: 31px;
+	line-height: 31px;
+	color: #444;
+	font-size: 16px
+}
+
+.pay-readme p {
+	margin: 0 auto;
+	padding: 0;
+	height: 21px
+}
+
+.message .ms-icon,.message h1 {
+	margin-right: 10px;
+	height: 45px;
+	display: inline-block;
+	line-height: 1.5
+}
+
+.message {
+	width: 540px;
+	margin-top: 50px;
+	margin-bottom: 30px
+}
+
+.message .ms-icon {
+	font-size: 28px;
+	color: #fff;
+	width: 45px;
+	border-radius: 50%;
+	background: #1BAE5D;
+	text-align: center
+}
+
+.message h1 {
+	font-size: 20px;
+	color: #333
+}
+
+.message small {
+	display: inline-block;
+	font-size: 14px
+}
+
+.message .mes {
+	display: inline-block;
+	margin-left: 60px;
+	font-size: 14px;
+	line-height: 1.5
+}
+
+.more-prod {
+	margin-top: 20px;
+	border-bottom: 2px solid #888
+}
+
+.more-prod-ls {
+	float: left;
+	width: 1169px;
+	height: 232px;
+	border: 1px solid #ddd;
+	border-top: none;
+	border-right: none;
+	margin-top: -3px
+}
+
+.more-prod-ls .mpls {
+	float: left;
+	width: 202.8px;
+	padding: 15px;
+	height: 202px;
+	border-right: 1px solid #ddd
+}
+
+.cz-table,.cz-table tbody tr {
+	border: none
+}
+
+.more-prod-ls .mpls a {
+	display: block;
+	width: 202px;
+	height: 160px
+}
+
+.more-prod-ls .mpls a img {
+	display: block;
+	max-width: 202px;
+	max-height: 160px
+}
+
+.more-prod-ls .mpls p {
+	margin: 0 auto;
+	padding: 0;
+	display: block;
+	width: 202px;
+	height: 21px;
+	line-height: 21px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 14px
+}
+
+.cz-title {
+	margin-top: 100px
+}
+
+.cz-table {
+	margin-top: 20px;
+	margin-bottom: 100px
+}
+
+.cz-money {
+	display: inline-block;
+	width: 146px;
+	height: 46px;
+	border: 2px solid #FFCCCA;
+	margin-right: 10px;
+	line-height: 46px;
+	text-align: center;
+	font-size: 16px;
+	color: #333;
+	font-weight: 700;
+	cursor: pointer
+}
+
+.cz-money.active,.cz-money:hover {
+	border-color: #FF2E63
+}
+
+.cz-money .other {
+	display: inline-block;
+	width: 120px;
+	height: 23px;
+	line-height: 23px;
+	font-size: 12px;
+	font-weight: initial
+}
+
+.cz-money .other input[type=text] {
+	width: 40px;
+	border: 1px solid #ddd;
+	display: inline;
+	margin-left: 5px
+}
+
+.wx-pay-mes {
+	margin-top: 50px;
+	width: 1170px;
+	line-height: 23px;
+	font-size: 14px
+}
+
+.wx-pay-nav .wx-qrcode h3,.wx-pay-nav h1 {
+	font-size: 18px;
+	height: 40px;
+	line-height: 40px;
+	font-weight: initial
+}
+
+.wx-pay-nav {
+	margin-top: 20px;
+	width: 1168px;
+	padding-bottom: 40px;
+	border: 1px solid #ddd;
+	border-top: 3px solid #C43926
+}
+
+.wx-pay-nav h1 {
+	width: 1100;
+	margin: 10px 0 20px 20px
+}
+
+.wx-pay-nav .wx-qrcode {
+	position: relative;
+	width: 259px
+}
+
+.wx-pay-nav .wx-qrcode h3 {
+	display: block;
+	width: 259px;
+	color: #444;
+	text-align: center
+}
+
+.wx-pay-nav .wx-qrcode h2 {
+	display: block;
+	width: 259px;
+	height: 40px;
+	line-height: 40px;
+	color: #C43926;
+	font-size: 20px;
+	text-align: center
+}
+
+.wx-pay-nav .wx-qrcode span,.wx-pay-nav .wx-qrcode span img {
+	height: 259px;
+	display: block;
+	width: 259px
+}
+
+.wx-pay-nav .wx-qrcode span {
+	margin-top: 20px
+}
+
+.wx-pay-nav .wx-qrcode i {
+	display: block;
+	margin-top: 30px;
+	width: 259px;
+	height: 82px
+}
+
+.wx-pay-nav .wx-qrcode .readme {
+	width: 204px;
+	height: 190px;
+	position: absolute;
+	right: -230px;
+	top: 0
+}
+
+.pay-back {
+	width: 600px;
+	text-align: center
+}
+
+.pay-back .monu-body h3 {
+	width: 60%;
+	display: inline
+}
+
+.pay-back .monu-body .paysss {
+	font-size: 14px
+}
+
+.pay-back .monu-body .assicon {
+	color: #F59C00;
+	font-size: 26px
+}
+
+.pay-back .monu-body .buttens {
+	margin-top: 25px;
+	margin-bottom: 10px
+}
+
+.pay-back .monu-body small {
+	display: inline;
+	margin-left: 10px;
+	cursor: pointer
+}
+
+.activity {
+	width: 550px;
+	border: 1px solid #ddd;
+	margin-right: 30px;
+	display: inline-block;
+	margin-top: 30px;
+	margin-left: 5px;
+	position: relative;
+	padding-bottom: 50px
+}
+
+.activity:nth-of-type(2n) {
+	margin: 0
+}
+
+.activity .img {
+	width: 550px;
+	height: 210px;
+	overflow: hidden
+}
+
+.activity .img img {
+	width: 100%
+}
+
+.activity .lines {
+	position: absolute;
+	left: -5px;
+	bottom: 16px;
+	width: 200px;
+	height: 28px;
+	line-height: 28px;
+	color: #fff;
+	font-size: 14px;
+	background: #F65E5E;
+	padding-left: 10px;
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px #ddd
+}
+
+.activity .lines:before {
+	position: absolute;
+	bottom: -4px;
+	left: 0;
+	content: '';
+	width: 0;
+	height: 0;
+	border-top: 5px solid #5D2626;
+	border-left: 5px solid transparent
+}
+
+.activity h4 {
+	display: block;
+	width: 540px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 16px;
+	color: #555;
+	padding-left: 10px;
+	position: relative
+}
+
+.activity h4 small {
+	position: absolute;
+	right: 10px;
+	font-size: 12px;
+	color: #888;
+	font-weight: initial
+}
+
+.activity .enter {
+	position: absolute;
+	right: 10px;
+	bottom: 10px
+}
+.pay-table {
+	display: block;
+	width: 1058px;
+	border:1px solid #ddd;
+}
+.pay-title {
+	display: block;
+	width: 1043px;
+	padding-left: 15px;
+	height: 33px;
+	line-height: 33px;
+	padding-top:12px;
+	background:#fafafa;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+.pay-title b {
+	display: inline;
+	padding:6px 15px;
+	font-size: 15px;
+	color: #888;
+	margin:0px 0px;
+	border:none;
+	background:#fafafa;
+	margin-top:-2px;
+	cursor: pointer;
+}
+.pay-title b.active {
+	padding:8px 15px;
+	background:#fff;
+	color:#C43926;
+	border:1px solid #ddd;
+	border-bottom: none;
+}
+.pay-nav {
+	display: block;
+	width: 1028px;
+	padding:15px;
+}
+.pay-nav h5,.pay-nav h6 {
+	display: block;
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+	font-size: 16px;
+	text-align: left;
+	font-weight: initial;
+	margin-bottom: 20px;
+}
+.pay-nav h5 small {
+	font-size: 12px;
+	color: #ddd;
+}
+.pay-nav h6 {
+	font-size: 12px;
+	text-align: center;
+	color:#2f88cc;
+	cursor: pointer;
+	margin: 0px auto;
+	padding:0;
+}
+.pay-nav h6 i {
+	font-style:initial;
+}
+.pay-label .pays {
+	text-align: left;
+	line-height: 48px;
+	padding-left: 7px;
+	display: block;
+}
+
+.pay-label {
+	width: 181px;
+    height: 50px;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: -5px;
+    margin-top: -5px;
+    background: url(../images/bg_banklist.png) no-repeat 0 0;
+}
+.pay-label:hover,.pay-label.active {
+    background: url(../images/bg_banklist.png) no-repeat 0 -55px;
+    z-index: 99;
+}
+.SHXNX,.HBNX,.GSNX,.BHRCB,.HUBNX,.DYLSCZ,.JJCCB,.BLOG,.BONC,.GDNYB,.CMB,.JSB,.JHCCB,.FDB,.CQRCB,.LWB,.CZSB,.GRCB,.HSBC,.SJBC,.TRCB,.SDRCB,.KLB,.CITI,.DGCB,.GZCB,.HBCB,.CDRCB,.JLCB,.CDRCB,.JLCB,.CDRCB,.STAN,.JZB,.EGB,.WFCCB,.BJRCB,.WZCB,.DZB,.QSB,.GNB,.CJCCB,.BOLY,.JZCB,.BOIMC,.ORDOS,.BOXM,.FXB,.YNRCC,.WZCB,.CZCB,.TJCB,.QLB,.DRCB,.BOLJ,.BSB,.TJCB,.BOCD,.TAB,.RZB,.QDCCB,.HKB,.BONX,.LSB,.WJRCB,.DLCB,.ZJTLCB,.CHAB,.CIB,.HZB,.CEB,.BOS,.CQCB,.NJCB,.BOB,.ICBC,.CCB,.NBCB,.CMBC,.bank-visa,.bank-mastercard,.ABC,.BOC,.CITIC,.BCM,.CGB,.HXB,.PSBC,.bank-szfzyh,.PAB,.SPDB,.CBHB,.bank-cqsxyh,.BEAI,.HSB,.SRCB,.CZB,.CITIC{background-image: url(../images/banklogo.gif);position:absolute;top:11px;left:7px;z-index:1;height:26px;width:160px;}
+.BHRCB{background-position:0 -3114px; width:160px;}
+.GSNX{background-position:0 -3086px; width:155px;}
+.HBNX{background-position:0 -3060px; width:155px;}
+.SHXNX{background-position:0 -3146px; width:155px;}
+.HUBNX,.DYLSCZ,.JJCCB,.BLOG,.BONC,.GDNYB,.CMB,.JSB,.JHCCB,.FDB,.CQRCB,.LWB,.CZSB,.GRCB,.HSBC,.SJBC,.TRCB,.SDRCB,.KLB,.CITI,.DGCB,.GZCB,.HBCB,.CDRCB,.JLCB,.CDRCB,.JLCB,.CDRCB,.STAN,.JZB,.EGB,.WFCCB,.BJRCB,.WZCB,.DZB,.QSB,.GNB,.CJCCB,.BOLY,.JZCB,.BOIMC,.ORDOS,.BOXM,.FXB,.YNRCC,.WZCB,.CZCB,.TJCB,.QLB,.DRCB,.BOLJ,.BSB,.TJCB,.BOCD,.TAB,.RZB,.QDCCB,.HKB,.BONX,.LSB,.WJRCB,.DLCB,.ZJTLCB,.CHAB,.CIB,.HZB,.CEB,.BOS,.CQCB,.NJCB,.BOB,.ICBC,.CCB,.NBCB,.CMBC,.bank-visa,.bank-mastercard,.ABC,.BOC,.CITIC,.BCM,.CGB,.HXB,.PSBC,.bank-szfzyh,.PAB,.SPDB,.CBHB,.bank-cqsxyh,.BEAI,.HSB,.SRCB,.CZB,.CITIC{background-image: url(../images/banklogo.gif);position:absolute;top:11px;left:7px;z-index:1;height:26px;width:160px;}
+
+.HUBNX{background-position:0 -3038px;; width:155px;}
+.JJCCB{background-position:0 -3005px; width:118px;}
+.DYLSCZ{background-position:0 -568px;width: 148px; }/*东营莱商村镇银行*/
+.CBHB{ background-position: 0 2px; width: 138px; } 
+.bank-cqsxyh{ background-position: 0 -27px; width: 138px; } 
+.CGB{ background-position: 0 -88px; width: 138px; } 
+.HSB{ background-position: 0 -114px; width: 138px; } 
+.HXB{ background-position: 0 -145px; width: 138px; } 
+.BCM{ background-position: 0 -180px; width: 138px; } 
+.PAB{ background-position: 0 -209px; width: 138px; } 
+.SPDB{ background-position: 0 -237px; width: 138px; } 
+.SRCB{ background-position: 0 -265px; width: 138px; } 
+.bank-szfzyh{ background-position: 0 -297px; width: 156px; } 
+.CIB{ background-position: 0 -330px; width: 138px; } 
+.CEB{ background-position: 0 -358px; width: 138px; } 
+.ICBC{ background-position: 0 -387px; width: 138px; } 
+.CCB{ background-position: 0 -417px; width: 138px; } 
+.CMBC{ background-position: 0 -448px; width: 138px; } 
+.ABC{ background-position: 0 -476px; width: 138px; } 
+.BOC{ background-position: 0 -506px; width: 138px; } 
+.PSBC{ background-position: 0 -537px; width: 110px; } 
+.CZB{ background-position: 0 -570px; width: 148px; } 
+.CMB{ background-position: 0 -601px; width: 138px; } 
+.CITIC{ background-position: 0 -633px; width: 138px; } 
+.CITIC{ background-position: 0 -664px; width: 130px; } 
+.bank-visa{ background-position: 0 -700px; width: 110px; } 
+.bank-mastercard{ background-position:0 -742px;width:130px; }
+.NBCB{ background-position: 0 -789px; width: 110px; } 
+.BOB{ background-position: 0 -839px; width: 146px; }
+.HZB{ background-position: 0 -884px; width: 134px; }
+.BOS{ background-position: 0 -931px; width: 120px; }
+.NJCB{ background-position: 0 -974px; width: 130px; }
+.CQCB{ background-position: 0 -1012px; width: 150px; }
+.ZJTLCB{ background-position:0 -1254px; width: 133px; }
+.JSB{ background-position:0 -1158px; width: 102px; }
+.JHCCB{ background-position:0 -1286px; width: 106px; }
+.FDB{ background-position:0 -1319px; width: 100px; }
+.CQRCB{ background-position:0 -1222px; width: 136px; }
+.EGB{ background-position:0 -1350px; width: 106px; }
+.BJRCB{ background-position:0 -1052px; width: 115px; }
+.WZCB{ background-position:0 -1195px; width: 110px; }
+.TJCB{ background-position:0 -1383px; width: 105px; }
+.BOCD{ background-position:0 -1414px; width: 105px; }
+.QDCCB{ background-position:0 -1446px; width: 105px; }
+.HKB{ background-position:0 -1481px; width: 105px; }
+.BONX{ background-position:0 -1510px; width: 105px; }
+.WJRCB{ background-position:0 -1540px; width: 133px; }
+.DLCB{ background-position:0 -1570px; width: 105px; }
+.BOXM{ background-position:0 -2121px; width: 105px; }
+.CHAB{ background-position:0 -1605px; width: 105px; }
+.LSB{ background-position:0 -1635px; width: 105px; }
+.TAB{ background-position:0 -1667px; width: 105px; }
+.RZB{ background-position:0 -1699px; width: 105px; }
+.WFCCB{ background-position:0 -1735px; width: 105px; }
+.LWB{ background-position:0 -1772px; width: 105px; }
+.DZB{ background-position:0 -1811px; width: 105px; }
+.QSB{ background-position:0 -1848px; width: 105px; }
+.GNB{ background-position:0 -1888px; width: 130px; }
+.CJCCB{ background-position:0 -1926px; width: 130px; }
+.BOLY{ background-position:0 -1966px; width: 105px; }
+.JZCB{ background-position:0 -2009px; width: 142px; }
+.BOIMC{ background-position:0 -2043px; width: 115px; }
+.ORDOS{ background-position:0 -2083px; width: 130px; } 
+.FXB{ background-position:0 -2158px; width: 105px; }
+.YNRCC{ background-position:0 -2192px; width: 115px; } 
+.CZCB{ background-position:0 -2230px; width: 130px; } 
+.QLB{ background-position:0 -2266px; width: 105px; }
+.DRCB{ background-position:0 -2302px; width: 135px; }
+.CZSB{ background-position:0 -2404px; width: 105px; }
+.BOLJ{ background-position:0 -2337px; width: 105px; }
+.BSB{ background-position:0 -2372px; width: 105px; }
+.JZB{ background-position:0 -2437px; width: 105px; }
+.BEAI{ background-position: 0 -2947px; width: 138px; } 
+.GRCB{ background-position:0 -2471px; width:130px; }
+.HSBC{ background-position:0 -2504px; width: 140px; }
+.SJBC{ background-position:0 -2537px; width: 105px; }
+.GZCB{background-position:0 -2571px; width: 105px; }
+.HBCB{background-position:0 -2605px; width: 130px; }
+.CDRCB{background-position:0 -2638px; width: 130px; }
+.JLCB{background-position:0 -2571px; width: 105px; }
+.CDRCB{background-position:0 -2571px; width: 105px; }
+.STAN{background-position:0 -2744px; width: 144px; }
+.TRCB{background-position:0 -2777px; width: 130px; }
+.SDRCB{background-position:0 -2812px; width: 150px; }
+.KLB{background-position:0 -2846px; width: 105px; }
+.CITI{background-position:0 -2878px; width: 144px; }
+.DGCB{background-position:0 -2912px; width: 105px; }
+.BONC{ background-position: 0 -2975px; width: 138px; } 
+.GDNYB{ background-position: 0 -1888px; width: 138px; }
+.BLOG{background-position:0 -2334px; width:120px;}
+
+/**
+ * 新增银行列表
+ * 2015-11-3
+ * Linder Wang
+**/
+.WHCCB,.DYCCB,.BOGY,.EGB,.JLNX,.LZCB,.NMGNX,.PZHCCB,.SHXNX,.SCNX,.BJRCB,.JSNX,.SXNX,.BOJN,.BOZZ,.YTCB,.BOBD,.WHRCB,
+.HNNX,.BOGL,.ZJTLCB,.BOYK,.SHBANK,.LYCB,.HUNNX,.LNNX,.BOXIA,.GXNX ,.GZNX ,.HBCL ,.TJRCB,.CZCB,.ZJKCCB,.wx,.alipay,.yunpay
+{background-image: url(../images/banklogo.gif);position:absolute;top:11px;left:7px;z-index:1;height:26px;width:160px;}
+.WHCCB{background-position: 0 -3185px;}
+.DYCCB{background-position: 0 -3262px;}
+.BOGY{background-position: 0 -3300px;}
+.EGB{background-position: 0 -3337px;}
+.JLNX{background-position: 0 -3375px;height: 25px !important;}
+.LZCB{background-position: 0 -3414px;}
+.NMGNX{background-position: 0 -3452px;}
+.PZHCCB{background-position: 0 -3490px;}
+.SHXNX{background-position: 0 -3528px;}
+.SCNX{background-position: 0 -3566px;}
+.BJRCB{background-position: 0 -3604px;}
+.JSNX{background-position: 0 -3642px;}
+.SXNX{background-position: 0 -3680px;}
+.BOJN{background-position: 0 -3718px;}
+.BOZZ{background-position: 0 -3756px;}
+.YTCB{background-position: 0 -3793px;}
+.BOBD{background-position: 0 -3832px;}
+.WHRCB{background-position: 0 -3907px;}
+.HNNX{background-position: 0 -3984px;}
+.BOGL{background-position: 0 -4022px;}
+.ZJTLCB{background-position: 0 -4059px;}
+.BOYK{background-position: 0 -4092px;}
+.SHBANK{background-position: 0 -4130px;}
+
+.LYCB{background-position: 0 -4244px;}
+.HUNNX{background-position: 0 -4167px;}
+.LNNX{background-position: 0 -4282px;}
+.BOXIA{background-position: 0 -4206px;}
+
+.GXNX{background-position: 0 -4320px;}/*广西农信*/
+.GZNX{background-position: 0 -4356px;}/*贵州农信*/
+.HBCL{background-position: 0 -4390px;}/*湖北银行*/
+.TJRCB{background-position: 0 -2778px;}/*天津农商行*/
+.CZCB{background-position: 0 -2232px;}/*浙江稠州商行*/
+.ZJKCCB{background-position: 0 -4427px;}/*张家口商业银行*/
+.wx {background-position:0 -4458px;}
+.alipay {background-position:0 -4495px;}
+.yunpay {background-position:0 -4529px;}
+.paypal {
+	background: url(../images/paypal.png) no-repeat center left;
+	background-size: contain;
+	width: 120px;
+	height: 26px;
+	position:absolute;
+	top:11px;
+	left:7px;
+	z-index:1
+}

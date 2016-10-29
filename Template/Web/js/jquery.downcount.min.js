@@ -1,0 +1,24 @@
+! function(a) {
+	a.fn.downCount = function(b, c) {
+		function h() {
+			var a = f - ((new Date).getTime() - g);
+			if (0 > a) return clearInterval(j), void(c && "function" == typeof c && c());
+			var d = (parseInt(a / 1e3 / 60 / 60 % 60), parseInt(a / 1e3 / 60 % 60)),
+				h = parseInt(a / 1e3 % 60),
+				k = parseInt(a % 60);
+			e.html('<span class="countDiv"><span class="position">' + i(d) + '</span><span class="position">' + i(h) + '</span><span class="position">' + i(k) + "</span></span>")
+		}
+
+		function i(a) {
+			return "<span>" + Math.floor(a / 10) % 10 + "</span><span>" + a % 10 + "</span>"
+		}
+		var d = a.extend({
+				difference: null,
+				now: null
+			}, b),
+			e = this,
+			f = parseInt(d.difference) + parseInt(d.now),
+			g = (new Date).getTime() - parseInt(d.now),
+			j = setInterval(h, 50)
+	}
+}(jQuery);

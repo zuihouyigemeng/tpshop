@@ -1,0 +1,96 @@
+<extend name="Public/base"/>
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>幻灯</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+				<div class="header">							
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<form action="{:U()}" class="form-horizontal"  method="post">
+						<div class="tab-pane active" id="basics">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">标题</label>
+								<div class="col-sm-6">
+									<input type="text" name="title" class="form-control" value="{$info.title|default=''}" placeholder="标题"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">图片</label>
+								<div class="col-sm-6">
+									<input type="file" id="upload_picture">
+									<input type="hidden" name="cover_id" id="cover_id" value="{$info.cover_id|default=0}"/>
+									<div id="shop-pic">
+									<notempty name="info.picurl">
+										<img src="{$info.picurl}" class="img-thumbnail" style="height:100px;"/>
+									</notempty>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">连接</label>
+								<div class="col-sm-6">
+									<input type="text" name="link" class="form-control" value="{$info.link|default=''}" placeholder="连接地址"/>
+								</div>
+							</div>
+						</div>
+						<input type="hidden" name="id" value="{$info.id|default=''}">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button class="btn btn-primary ajax-post" type="submit" target-form="form-horizontal">提 交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+</block>
+<block name="script">
+	<js href="__STATIC__/uploadify/jquery.uploadify.min.js" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+		
+			<present name="info.id">
+				highlight_subnav('{:U('Slider/index')}');
+			<else/>
+				highlight_subnav('{:U('Slider/add')}');
+			</present>	
+			
+			$("#upload_picture").uploadify({
+				"height"          : 35,
+				"swf"             : "__STATIC__/uploadify/uploadify.swf",
+				"fileObjName"     : "download",
+				"buttonClass"     :  "btn btn-success fa fa-upload no-padding",
+				"buttonText"      : " 上传图片",
+				"uploader"        : "{:U('Slider/uploadPicture',array('session_id'=>session_id()))}",
+				"width"           : 100,
+				'removeTimeout'	  : 1,
+				'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				"onUploadSuccess" : uploadPicture,
+				'onFallback' : function() {
+					alert('未检测到兼容版本的Flash.');
+				}
+			});
+			function uploadPicture(file, data){
+				var data = $.parseJSON(data);
+				var src = '';
+				if(data.status){
+					$("#cover_id").val(data.id);
+					src = data.url || '__ROOT__' + data.path
+					$("#shop-pic").html(
+						'<img src="__ROOT__' + src + '" class="img-thumbnail" style="height:100px;"/>'
+					);
+				} else {
+					layer.msg(data.info, {icon: 2});
+				}
+			}
+		});
+	</script>
+</block>

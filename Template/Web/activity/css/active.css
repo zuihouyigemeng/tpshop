@@ -1,0 +1,119 @@
+@charset "utf-8";
+.yelows {color: #FFFF00}
+.top-images1 {
+	width: 100%;
+	height: auto;
+	background: #31A5D7;
+	text-align: center;
+	position: relative;
+}
+.top-images2 {background: #FFC926}
+.top-images3 {background: #FABB0E}
+.top-images4 {background: #2CB9FE}
+.top-images5 {background: #029487;padding-top: 30px;padding-bottom: 20px}
+.top-back1 {
+	width: 100%;
+	height: 51px;
+	position: absolute;
+	bottom: -20px;
+	left: 0;
+	background:url(../images/topback1.png);
+}
+.top-back2 {background:url(../images/topback2.png)}
+
+.top-images8 {
+	width: 100%;
+	height: 708px;
+	background: #31A5D7;
+	text-align: center;
+	position: relative;
+	background:url(../images/huodong01.jpg);
+}
+
+.w960 { width: 960px; text-align: center; padding-bottom: 30px }
+.w960 .bg2 {
+	width: 960px;
+	height: 473px;
+	background: url(../images/huodong02.jpg);
+}
+.w960 .bg1 {
+	width: 960px;
+	height: 575px;
+	background: url(../images/huodong03.jpg);
+}
+.w960 .bg3 {
+	display: inline-block;
+	cursor: pointer;
+	width: 346px;
+	height: 100px;
+	background: url(../images/huodong04.jpg);
+	margin-top:30px;
+}
+
+.act-nav1 {
+	width: 100%;
+	background: #248CB7;
+	padding-top:40px;
+	padding-bottom: 60px;
+}
+.act-nav2 {background: #B25900;}
+.act-nav3 {background:#E83E3E;text-align: center;}
+.act-nav4 {background: #FDBF08;text-align: center}
+.act-nav5 {background: #5F7C8C;}
+.act-nav1 h1 {
+	display: block;
+	margin-top:40px;
+	width: 100%;
+	text-align: center;
+	color:#fff;
+	font-size: 24px;
+	line-height:30px;
+	padding-bottom: 35px;
+	background:url(../images/star.png) no-repeat bottom center; 
+}
+.act-nav1 .redme {
+	display: block;
+	width: 100%;
+	list-style: none;
+	margin-top:20px;
+}
+.act-nav1 .redme li {
+	display: block;
+	width: 70%;
+	height: 31px;
+	line-height: 31px;
+	font-size: 16px;
+	color:#fff;
+}
+.act-nav1 .redme .game {
+	display: inline-block;
+	margin:15px 15px;
+	width: auto;
+	box-shadow: 3px 3px 3px #768F9C;
+	height: 495px;
+}
+.act-nav1 .redme .game img {
+	width: 330px;
+}
+.act-nav1 .redme .startGame {
+	display: block;
+	height: auto;
+}
+.act-nav1 .redme h2 {color: #fff}
+
+.act-nav1 .jiangli {
+	display: block;
+	width: 70%;
+	border:1px solid #fff;
+	margin-top: 30px;
+	border-bottom: none;
+}
+.act-nav1 .jiangli li {
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	padding-left: 10px;
+	color: #fff;
+	border-bottom:1px solid #fff;
+}

@@ -1,0 +1,76 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>文章</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+				<div class="header">							
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<div class="col-sm-12">
+						<div class="pull-right">
+							<div class="btn-group">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								选择栏目 <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu">
+								<li><a href="{:U('index')}">所有栏目</a></li>
+								<li><a href="{:U('index?category=1')}">公告</a></li>
+								<li><a href="{:U('index?category=2')}">帮助</a></li>
+							  </ul>
+							</div>
+							<a class="btn btn-success" href="{:U('add')}" ><i class="fa fa-plus-square"></i> 添加内容</a>
+						</div>
+					</div>
+					<table class="no-border blue">
+						<thead class="no-border">
+						<tr>
+							<th style="width:60%;">标题</th>
+							<th style="width:10%;">所属栏目</th>
+							<th style="width:10%;">更新时间</th>
+							<th class="text-right">操作</th>
+						</tr>
+						</thead>
+						<notempty name="newslist">
+						<tbody class="no-border-y">
+						<volist name="newslist" id="vo">
+						<tr>
+							<td style="width:60%;">{$vo['title']}</td>
+							<td style="width:10%;">{:get_category($vo['category'])}</td>
+							<td style="width:10%;">{$vo.update_time|time_format=###,"Y-m-d"}</td>
+							<td class="text-right">
+								<a data-placement="left" data-toggle="tooltip" data-original-title="修改" class="label label-primary" href="{:U('edit?id='.$vo['id'])}"><i class="fa fa-pencil"></i></a>
+                				<a data-placement="left" data-toggle="tooltip" data-original-title="删除" class="label label-danger ajax-get" href="{:U('del?id='.$vo['id'])}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						</volist>
+						</tbody>
+						<else/>
+						<td colspan="4"> aOh! 暂时还没有内容! </td>
+						</notempty>
+					</table>
+					<div class="content col-lg-12 pull-left">
+                        <div class="panel-foot text-center">
+                            <div class="page">{$_page}</div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</block>
+<block name="script">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			highlight_subnav('{:U('News/index')}');
+		});
+	</script>
+</block>

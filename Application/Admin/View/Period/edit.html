@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="__IMG__/favicon.png">
+<title>购买记录</title>
+<!-- Bootstrap core CSS -->
+<css href="__JS__/bootstrap/dist/css/bootstrap.css" />
+<css href="__FONTS__/font-awesome-4/css/font-awesome.min.css" />
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv-printshiv.js"></script>
+    <![endif]-->
+<!-- Bootstrap core CSS -->
+<css href="__JS__/jquery.nanoscroller/nanoscroller.css" />
+<css href="__CSS__/pygments.css" />
+<!-- Custom styles for this template -->
+<css href="__CSS__/style.css" />
+</head>
+<body>
+<div class="cl-mcont">
+	<div class="gallery-cont">
+		<div class="nano nscroller has-scrollbar" style="height:450px;">
+			<div class="content">
+			<div class="panel-group accordion accordion-semi" id="accordion">
+					  <volist name="info['address']" id="vo">
+					  <div class="panel panel-default">
+						<div class="panel-heading">
+						  <h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#ac3-{$i}" class="<gt name="i" value="1">collapsed</gt>">
+								<i class="fa fa-angle-right"></i> <eq name="i" value="1">默认发货地址<else/>备用发货地址</eq>
+							</a>
+						  </h4>
+						</div>
+						<div id="ac3-{$i}" class="panel-collapse collapse <eq name="i" value="1">in</eq>" style="height: auto;">
+						  <div class="panel-body">
+								<h5 class="list-group-item-heading"><i class="fa fa-user"> </i>{$vo.nickname}</h5>
+								<div><i class="fa fa-mobile-phone"></i> {$vo.tel}</div>
+								<div><i class="fa fa-map-marker"></i> {$vo.province}{$vo.city}{$vo.dist}{$vo.address}</div>
+						  </div>
+						</div>
+					  </div>
+					  </volist>  
+					</div>
+				<div class="tab-container">
+					<form action="{:U()}" class="form-horizontal"  method="post">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">快递公司</label>
+							<div class="col-sm-6">
+								<input type="text" name="express_name" class="form-control" value="{$info.express_name|default=''}" placeholder="快递公司"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">快递单号</label>
+							<div class="col-sm-6">
+								<input type="text" name="express_no" class="form-control" value="{$info.express_no|default=''}" placeholder="快递单号"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<input name="id" type="hidden" value="{$Think.get.id}" />
+								<button class="btn btn-primary ajax-post no-refresh" type="submit" callback="express('pid_{$Think.get.id}')" target-form="form-horizontal">发 货</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+<js href="__JS__/jquery.js" />
+<js href="__JS__/jquery.nanoscroller/jquery.nanoscroller.js" />
+<js href="__STATIC__/layer/layer.js" />
+<js href="__JS__/behaviour/web.js" />
+<js href="__JS__/bootstrap/dist/js/bootstrap.min.js" />
+<js href="__JS__/behaviour/weixin.js" />
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".nscroller").nanoScroller();
+});
+function express(id){
+	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+	parent.$('#'+id,window.parent.document).removeClass('label-success').addClass('label-default');
+	parent.layer.close(index); //再执行关闭    
+}
+</script>
+</html>

@@ -1,0 +1,150 @@
+<extend name="Public/base"/>
+<block name="style">
+	<css href="__JS__/jquery.icheck/skins/square/blue.css" />
+</block>
+
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>商城</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+			<form class="shop-form" method="post" action="{:U('auto')}">
+				<div class="header">
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<div class="col-sm-12">
+						<div class="col-sm-2 no-padding">
+						<input id="check-all" type="checkbox" name="checkall" style="position: absolute;">
+						<a class="btn btn-success ajax-post" href="#" target-form="shop-form"><i class="fa fa-check-square"></i> 自动投注</a>
+						</div>
+						<label class="pull-left control-label">产品名称</label>
+						<div class="col-sm-3">
+							<input type="text" name="keyword" class="form-control">
+						</div>
+						<div class="col-sm-2">
+							<button type="button" id="search" url="{:U('index?category='.$_GET['category'])}" class="btn btn-success">搜素</button>
+						</div>
+						<div class="pull-right">
+							<div class="btn-group">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								选择专区 <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu">
+								<li><a href="{:U('index')}">所有专区</a></li>
+								<volist name="ten" id="vo">
+				                    <li><a href="{:U('index?ten='.$vo['id'])}">{$vo.html}{$vo.title}</a></li>
+								</volist>
+							  </ul>
+							</div>
+							<div class="btn-group">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								选择分类 <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu">
+								<li><a href="{:U('index')}">所有分类</a></li>
+								<volist name="category" id="vo">
+				                    <li><a href="{:U('index?category='.$vo['id'])}">{$vo.html}{$vo.title}</a></li>
+								</volist>
+							  </ul>
+							</div>
+							<a class="btn btn-success" href="{:U('add')}" ><i class="fa fa-plus-square"></i> 添加内容</a>
+						</div>
+					</div>
+					<table class="no-border blue">
+						<thead class="no-border">
+						<tr>
+							<th style="width:5%;">选择</th>
+							<th style="width:55%;">标题</th>
+							<th style="width:10%;">分类</th>
+							<th style="width:10%;">更新时间</th>
+							<th style="width:10%;">自动投注</th>
+							<th class="text-right">操作</th>
+						</tr>
+						</thead>
+						<notempty name="shoplist">
+						<tbody class="no-border-y">
+						<volist name="shoplist" id="vo">
+						<tr>
+							<td style="width:5%;"><input name="id[]" type="checkbox" value="{$vo.id}"></td>
+							<td style="width:55%;"><a href="#" class="opiframe" url="{:U('shop/period?id='.$vo['id'].'&price='.$vo['price'])}">{$vo['name']}</a><gt name="vo['ten']" value="0"><span class="color-danger" style="margin-left: 15px">{:get_ten_name($vo['ten'])}</span><gt></td>
+							<td style="width:10%;">{:get_category_name($vo['category'])}</td>
+							<td style="width:10%;">{$vo.update_time|time_format=###,"Y-m-d"}</td>
+							<td style="width:10%;"><eq name="vo['auto']" value="1"><i class="fa fa-check-square-o color-success"></i><else /><i class="fa fa-square-o"></i></eq></td>
+							<td class="text-right">
+                           	 	<a data-placement="left" data-toggle="tooltip" data-original-title="下架" class="label <eq name="vo.status" value="0">label-default<else/>label-warning</eq> confirm no-refresh ajax-get status" callback="status({$i})" href="{:U('status?id='.$vo['id'])}"><i class="fa fa-ban"></i></a>
+								<a data-placement="left" data-toggle="tooltip" data-original-title="修改" class="label label-primary" href="{:U('edit?id='.$vo['id'])}"><i class="fa fa-pencil"></i></a>
+                				<!-- <a data-placement="left" data-toggle="tooltip" data-original-title="删除" class="label label-danger ajax-get" href="{:U('del?id='.$vo['id'])}"><i class="fa fa-times"></i></a> -->
+							</td>
+						</tr>
+						</volist>
+						</tbody>
+						<else/>
+						<td colspan="3"> aOh! 暂时还没有内容! </td>
+						</notempty>
+					</table>
+					<div class="content col-lg-12 pull-left">
+                        <div class="panel-foot text-center">
+                            <div class="page">{$_page}</div>
+                        </div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</block>
+<block name="script">
+<js href="__JS__/jquery.icheck/icheck.min.js" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			highlight_subnav('{:U('Shop/index')}');
+		});
+		//搜索功能
+		$("#search").click(function(){
+			var url = $(this).attr('url');
+			var query = $(this).parents().prev().children('input').serialize();
+	        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+	        query = query.replace(/^&/g,'');
+	        if( url.indexOf('?')>0 ){
+	            url += '&' + query;
+	        }else{
+	            url += '?' + query;
+	        }
+			window.location.href = url;
+		});
+		function status(i){
+			$('.status:eq('+(i-1)+')').toggleClass('label-default').toggleClass('label-warning');
+		}
+		$('.opiframe').click(function(){
+			layer.open({
+				type: 2,
+				title: $(this).attr('data-name'),
+				shadeClose: true,
+				maxmin: false, //开启最大化最小化按钮
+				area: ['850px', '610px'],
+				content: [$(this).attr('url'), 'no']
+			});
+		});
+		$('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue checkbox',
+            radioClass: 'icheckbox_square-blue'
+        });
+      
+        $("#check-all").on('ifChanged',function(){
+            var checkboxes = $("tr td").find(':checkbox');
+            if($(this).is(':checked')) {
+                checkboxes.iCheck('check');
+            } else {
+                checkboxes.iCheck('uncheck');
+            }
+        });
+	</script>
+</block>

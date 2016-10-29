@@ -1,0 +1,211 @@
+<extend name="Public/base"/>
+<block name="style">
+	<css href="__JS__/bootstrap.datetimepicker/css/bootstrap-datetimepicker.min.css" />
+	<css href="__JS__/jquery.icheck/skins/square/blue.css" />
+</block>
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>活动</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+				<div class="header">							
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<div class="tab-container">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#basics" data-toggle="tab">基础</a></li>
+							<li><a href="#senior" data-toggle="tab">高级</a></li>
+						</ul>
+						<form action="{:U('save')}" class="form-horizontal"  method="post">
+						<div class="tab-content">
+							<div class="tab-pane active" id="basics">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">活动标识</label>
+									<div class="col-sm-6">
+										<input type="text" name="name" class="form-control" value="{$data.name|default=''}" placeholder="活动标识"/>
+										<small>（输入活动标识 英文字母）</small>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">活动名称</label>
+									<div class="col-sm-6">
+										<input type="text" name="title" class="form-control" value="{$data.title|default=''}" placeholder="活动名称"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">活动图片</label>
+									<div class="col-sm-6">
+										<input type="file" id="upload_picture">
+										<input type="hidden" name="picurl" id="picurl" value="{$data.picurl|default=''}"/>
+										<div id="shop-pic">
+											<img src="{:substr($data['picurl'], 1)}" class="img-thumbnail" style="height:100px;"/>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">活动图标</label>
+									<div class="col-sm-6">
+										<input type="text" name="icon" class="form-control" value="{$data.icon|default=''}" placeholder="活动图标"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">活动类型</label>
+									<div class="col-sm-6">
+										<select name="type" class="form-control">
+											<volist name=":get_activity_type(null,true)" id="vo">
+												<option value="{$key}" <eq name="data['type']" value="$key">selected="selected"</eq>>{$vo}</option>
+											</volist>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">活动描述</label>
+									<div class="col-sm-6">
+										<textarea name="remark" class="form-control" rows="5">{$data.remark}</textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">可见性</label>
+									<div class="col-sm-6">
+										<select class="form-control" name="display">
+											<option value="1">可见</option>
+											<option value="0">不可见</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">结束时间</label>
+									<div class="col-sm-6">
+									  <div class="input-group date datetime" data-min-view="2" data-date-format="yyyy-mm-dd">
+										<input type="text" name="end_time" class="form-control" value="{$data.end_time|time_format=###,'Y-m-d'}"/>
+										<span class="input-group-addon btn btn-primary"><span class="glyphicon glyphicon-th"></span></span>
+									  </div>					
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane" id="senior">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">活动规则</label>
+									<div class="col-sm-8">
+										<textarea name="rule" class="form-control" rows="5">{$data.rule}</textarea>
+										 <ul class="list-unstyle height text-gray">
+											<li>（输入活动规则，不写则只记录日志）</li>
+											<li>规则定义  table:$table|field:$field|condition:$condition|rule:$rule[|cycle:$cycle|max:$max][;......]</li>
+											<li>table->要操作的数据表，不需要加表前缀</li>
+											<li>field->要操作的字段</li>
+											<li>condition->操作的条件，目前支持字符串，默认变量{$self}为执行活动的用户 {$relf}</li>
+											<li>rule->对字段进行的具体操作，目前支持四则混合运算，如：1+score*2/2-3</li>
+											<li>cycle->执行周期，单位（小时），表示$cycle小时内最多执行$max次</li>
+											<li>max->单个周期内的最大执行次数（$cycle和$max必须同时定义，否则无效）</li>
+										</ul>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">日志规则</label>
+									<div class="col-sm-8">
+										<textarea name="log" class="form-control" rows="5">{$data.log}</textarea>
+										 <ul class="list-unstyle height text-gray">
+											<li>（记录日志备注时按此规则来生成，支持[变量|函数]。目前变量有：user,time,model,record,data）</li>
+											<li>user：触发活动的用户编号（uid）；time：触发活动的时间（NOW_TIME）；model：触发活动的模型；record：触发活动记录编号</li>
+											<li>data：上述变量结合的一个数组array('user'=>$user_id,,'model'=>$model,'record'=>$record_id,'time'=>NOW_TIME)</li>
+										</ul>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">web首页模板</label>
+									<div class="col-sm-6">
+										<input type="text" name="web_index_tpl" class="form-control" value="{$data.web_index_tpl}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">wap首页模板</label>
+									<div class="col-sm-6">
+										<input type="text" name="wap_index_tpl" class="form-control" value="{$data.wap_index_tpl}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">web列表模板</label>
+									<div class="col-sm-6">
+										<input type="text" name="web_list_tpl" class="form-control" value="{$data.web_list_tpl}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">wap列表模板</label>
+									<div class="col-sm-6">
+										<input type="text" name="wap_list_tpl" class="form-control" value="{$data.wap_list_tpl}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">web内容模板</label>
+									<div class="col-sm-6">
+										<input type="text" name="web_content_tpl" class="form-control" value="{$data.web_content_tpl}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">wap内容模板</label>
+									<div class="col-sm-6">
+										<input type="text" name="wap_content_tpl" class="form-control" value="{$data.wap_content_tpl}"/>
+									</div>
+								</div>
+							</div>
+							<input type="hidden" name="id" value="{$data.id}" />
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button class="btn btn-primary ajax-post" type="submit" target-form="form-horizontal">提 交</button>
+								</div>
+							</div>
+					 	</div>
+						</form>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+</block>
+<block name="script">
+	<js href="__JS__/bootstrap.datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" />
+	<js href="__STATIC__/uploadify/jquery.uploadify.min.js" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".datetime").datetimepicker({autoclose: true,language: 'zh-CN'});
+			setValue('display','{$data.display}');
+
+			$("#upload_picture").uploadify({
+				"height"          : 35,
+				"swf"             : "__STATIC__/uploadify/uploadify.swf",
+				"fileObjName"     : "download",
+				"buttonClass"     :  "btn btn-success fa fa-upload no-padding",
+				"buttonText"      : " 上传图片",
+				"uploader"        : "{:U('Activity/uploadPicture',array('session_id'=>session_id()))}",
+				"width"           : 100,
+				'removeTimeout'	  : 1,
+				'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				"onUploadSuccess" : uploadPicture,
+				'onFallback' : function() {
+					alert('未检测到兼容版本的Flash.');
+				}
+			});
+			function uploadPicture(file, data){
+				var data = $.parseJSON(data);
+				var src = '';
+				if(data.status){
+					src = data.url || '__ROOT__' + data.path
+					$("#picurl").val(src);
+					$("#shop-pic").html(
+						'<img src="__ROOT__' + src + '" class="img-thumbnail" style="height:100px;"/>'
+					);
+				} else {
+					layer.msg(data.info, {icon: 2});
+				}
+			}
+
+			highlight_subnav('{:U('Activity/add')}');
+		});
+	</script>
+</block>

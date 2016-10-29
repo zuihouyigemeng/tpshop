@@ -1,0 +1,25 @@
+/* 前后端通信相关的配置,注释只允许使用多行方式 */
+{
+    /* 上传图片配置项 */
+    "imageActionName": "uploadimage", /* 执行上传图片的action名称 */
+    "imageFieldName": "upfile", /* 提交的图片表单名称 */
+    "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 上传图片格式显示 */
+    "imageInsertAlign": "none", /* 插入的图片浮动方式 */
+    "imageUrlPrefix": "", /* 图片访问路径前缀 */
+
+    /* 上传视频配置 */
+    "videoActionName": "uploadvideo", /* 执行上传视频的action名称 */
+    "videoFieldName": "upfile", /* 提交的视频表单名称 */
+    "videoUrlPrefix": "", /* 视频访问路径前缀 */
+    "videoAllowFiles": [
+        ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+        ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid"], /* 上传视频格式显示 */
+
+    /* 列出指定目录下的图片 */
+    "imageManagerActionName": "listimage", /* 执行图片管理的action名称 */
+    "imageManagerListPath": "/ueditor/php/upload/image/", /* 指定要列出图片的目录 */
+    "imageManagerListSize": 20, /* 每次列出文件数量 */
+    "imageManagerUrlPrefix": "", /* 图片访问路径前缀 */
+    "imageManagerInsertAlign": "none", /* 插入的图片浮动方式 */
+    "imageManagerAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"] /* 列出的文件类型 */
+}

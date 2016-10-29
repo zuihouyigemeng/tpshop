@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="__IMG__/favicon.png">
+<title>{$meta_title}</title>
+<!-- Bootstrap core CSS -->
+<css href="__JS__/bootstrap/dist/css/bootstrap.css" />
+<css href="__FONTS__/font-awesome-4/css/font-awesome.min.css" />
+<!-- Custom styles for this template -->
+<css href="__CSS__/style.css" />
+</head>
+<body>
+<!-- Nifty Modal -->
+<div class="colored-header">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h3>{$meta_title}</h3>
+		</div>
+		<form action="{:U()}" class="form-x"  method="post">
+			<div class="modal-body form">
+				<div class="tab-container">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#basics" data-toggle="tab">专区</a></li>
+						<li><a href="#senior" data-toggle="tab">限购</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="basics">
+							<div class="form-group">
+								<label>购买单位</label>
+								<input type="text" class="form-control" name="unit" value="{$info.unit|default='1'}" placeholder="购买单位"/>
+							</div>
+							<div class="form-group">
+								<label>专区名称</label>
+								<input type="text" name="title" class="form-control" value="{$info.title|default=''}" placeholder="专区名称">
+							</div>
+							<div class="form-group">
+								<label>排序</label>
+								<input type="text" name="sort" class="form-control" value="{$info.sort|default=0}"/>
+							</div>
+						</div>
+						<div class="tab-pane" id="senior">
+							<div class="form-group">
+								<label>限购</label>
+								<select class="form-control" name="restrictions">
+									<option value="1">是</option>
+									<option value="0">否</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>限购数量</label>
+								<input name="restrictions_num" type="text" class="form-control" value="{$info.restrictions_num|default=''}" placeholder="限购数量">
+							</div>
+							<div class="form-group" style="margin-bottom: 88px;">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<input type="hidden" name="id" value="{$info.id|default=''}">
+				<button type="button" class="btn btn-default md-close">关闭</button>
+				<button type="submit" class="btn btn-primary ajax-post no-refresh" target-form="form-x" callback="mdclose(parent.layer.getFrameIndex(window.name))">提交</button>
+			</div>
+		</form>
+	</div>
+</div>
+<js href="__JS__/jquery.js" />
+<js href="__STATIC__/layer/layer.js" />
+<js href="__JS__/behaviour/web.js" />
+<script type="text/javascript">
+	$(function(){
+		var index = parent.layer.getFrameIndex(window.name);
+		$('.md-close').click(function(){
+			parent.layer.close(index);
+		});
+		mdclose = function(index){
+			parent.location.reload();
+			parent.layer.close(index);
+		}
+		setValue('restrictions','{$info.restrictions}');
+	});
+</script>
+<js href="__JS__/bootstrap/dist/js/bootstrap.min.js" />
+</body>
+</html>

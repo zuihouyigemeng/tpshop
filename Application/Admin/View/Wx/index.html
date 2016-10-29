@@ -1,0 +1,342 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="page-head">
+		<h2>系统信息</h2>
+	</div>
+	<div class="cl-mcont">
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-6">
+				<div class="block-flat">
+					<div class="overflow-hidden"> <i class="fa fa-file-text fa-4x pull-left color-primary"></i>
+						<h3 class="no-margin">商品</h3>
+						<p class="color-primary">Shop</p>
+					</div>
+					<div class="row">
+						<div class="col-sm-4 col-md-4 col-lg-6">
+							<div class="content">
+								<h2 class="no-margin">共计 {$count['shop']} 件</h2>
+							</div>
+						</div>
+						<div class="col-sm-4 col-md-4 col-lg-6">
+							<div class="content">
+								<h2 class="no-margin">今日开奖 {$count['today_period']} 期</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block-flat">
+					<div class="header">							
+						<h3>热门商品前5</h3>
+					</div>
+					<div class="row">
+						<div class="col-sm-4"><div id="ticket-chart" style="height:175px;"></div></div>
+						<div class="col-sm-8 no-padding">
+						<table class="no-borders no-strip padding-sm">
+							<tbody class="no-border-x no-border-y">
+							<volist name="count['shopCount']" id="top5">
+							  <tr>
+								<td style="width:15px;"><div class="legend" style="background:{$top5['color']};"></div></td>
+								<td style="width:80%;">{$top5['name']}</td>
+								<td class="text-right"><b>{$top5['count']}期</b></td>
+							  </tr>
+							 </volist>
+							</tbody>
+						  </table>
+						</div>
+					</div>
+				</div>
+				<div class="block-flat">
+					<div class="header">							
+						<h3>24小时投注图</h3>
+					</div>
+					<div class="content">
+						<div id="site_statistics2" style="height: 200px; padding: 0px; position: relative;"></div>							
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-6">
+				<div class="block-flat">
+					<div class="overflow-hidden"> <i class="fa fa-user fa-4x pull-left color-danger"></i>
+						<h3 class="no-margin">用户</h3>
+						<p class="color-danger">Users</p>
+					</div>
+					<div class="row">
+						<div class="col-sm-4 col-md-4 col-lg-6">
+							<div class="content">
+								<h2 class="no-margin">共计 {$count['user']} 人</h2>
+							</div>
+						</div>
+						<div class="col-sm-4 col-md-4 col-lg-6">
+							<div class="content">
+								<h2 class="no-margin">今日注册 {$count['today_user']} 人</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block-flat">
+					<div class="header">							
+						<h3>消费用户前5</h3>
+					</div>
+					<div class="row">
+						<div class="col-sm-4"><div id="ticket-user" style="height:175px;"></div></div>
+						<div class="col-sm-8 no-padding">
+						<table class="no-borders no-strip padding-sm">
+							<tbody class="no-border-x no-border-y">
+							<volist name="count['user_buy']" id="user_buy">
+							  <tr>
+								<td style="width:15px;"><div class="legend" style="background:{$user_buy['color']};"></div></td>
+								<td>{$user_buy['nickname']}</td>
+								<td class="text-right"><b>{$user_buy['count']}人次</b></td>
+							  </tr>
+							 </volist>
+							</tbody>
+						  </table>
+						</div>
+					</div>
+				</div>
+				<div class="block-flat">
+					<div class="header">							
+						<h3>当月注册用户</h3>
+					</div>
+					<div class="content">
+						<div id="site_reguser" style="height: 200px; padding: 0px; position: relative;"></div>							
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="script">
+	<js href="__JS__/jquery.flot/jquery.flot.min.js" />
+	<js href="__JS__/jquery.flot/jquery.flot.pie.min.js" />
+
+	<script type="text/javascript">
+		$(function() {
+		/*Pie Chart*/
+        var data = [
+		<volist name="count['shopCount']" id="top5">
+        { label: "{$top5['name']}", data: {$top5['proportion']},color:"{$top5['color']}"},
+		</volist>
+        ]; 
+		$.plot('#ticket-chart', data, {
+          series: {
+            pie: {
+              show: true,
+              innerRadius: 0.5,
+              shadow:{
+                top: 5,
+                left: 15,
+                alpha:0.3
+              },
+              stroke:{
+                width:0
+              },
+              label: {
+                show: false
+              },
+              highlight:{
+                opacity: 0.08
+              }
+            }
+          },
+          grid: {
+            hoverable: true,
+            clickable: true
+          },
+          legend: {
+            show: false
+          }
+        });
+
+    var pageviews = [
+	<volist name="count['buytime']" id="buytime">
+    [{$buytime['hour']}, {$buytime['count']}],
+	</volist>
+    ];
+		
+	$.plot($("#site_statistics2"), [{
+        data: pageviews,
+        label: "时间"
+      }
+      ], {
+        series: {
+          bars: {
+            show: true,
+            barWidth: 0.6,
+            lineWidth: 0,
+            fill: true,
+            hoverable: true,
+            fillColor: {
+              colors: [{
+                opacity: 1
+              }, {
+                opacity: 1
+              }
+              ]
+            } 
+          },
+          shadowSize: 2
+        },
+        legend:{
+          show: false
+        },
+        grid: {
+        labelMargin: 10,
+          axisMargin: 10000,
+          hoverable: true,
+          clickable: true,
+          tickColor: "rgba(0,0,0,0.15)",
+          borderWidth: 0
+        },
+        colors: [ "#50ACFE"],
+        xaxis: {
+          ticks: 11,
+          tickDecimals: 0
+        },
+        yaxis: {
+          ticks: 6,
+          tickDecimals: 0
+        }
+      });
+	  
+	  $("#site_statistics2").bind("plothover", function (event, pos, item) {
+        var str = "(" + pos.x.toFixed(2) + ", " + pos.y.toFixed(2) + ")";
+        if (item) {
+          if (previousPoint != item.dataIndex) {
+            previousPoint = item.dataIndex;
+            $("#tooltip").remove();
+            var x = item.datapoint[0],
+            y = item.datapoint[1];
+            showTooltip(item.pageX, item.pageY,
+            item.series.label + "" + x + " 投注 " + y);
+          }
+        } else {
+          $("#tooltip").remove();
+          previousPoint = null;
+        }
+      });
+
+      var regviews = [
+	<volist name="count['reguser']" id="reguser">
+    [{$reguser['day']}, {$reguser['count']}],
+	</volist>
+    ];
+
+      $.plot($("#site_reguser"), [{
+        data: regviews,
+        label: "月"
+      }
+      ], {
+        series: {
+          bars: {
+            show: true,
+            barWidth: 0.6,
+            lineWidth: 0,
+            fill: true,
+            hoverable: true,
+            fillColor: {
+              colors: [{
+                opacity: 1
+              }, {
+                opacity: 1
+              }
+              ]
+            } 
+          },
+          shadowSize: 2
+        },
+        legend:{
+          show: false
+        },
+        grid: {
+        labelMargin: 10,
+          axisMargin: 10000,
+          hoverable: true,
+          clickable: true,
+          tickColor: "rgba(0,0,0,0.15)",
+          borderWidth: 0
+        },
+        colors: [ "#50ACFE"],
+        xaxis: {
+          ticks: 11,
+          tickDecimals: 0
+        },
+        yaxis: {
+          ticks: 6,
+          tickDecimals: 0
+        }
+      });
+	  
+	  $("#site_reguser").bind("plothover", function (event, pos, item) {
+      
+        var str = "(" + pos.x.toFixed(2) + ", " + pos.y.toFixed(2) + ")";
+
+        if (item) {
+          if (previousPoint != item.dataIndex) {
+            previousPoint = item.dataIndex;
+            $("#tooltip").remove();
+            var x = item.datapoint[0],
+            y = item.datapoint[1];
+            showTooltip(item.pageX, item.pageY,
+              x + item.series.label + y+"人注册");
+          }
+        } else {
+          $("#tooltip").remove();
+          previousPoint = null;
+        }
+      });
+	  
+	  var data = [
+		<volist name="count['user_buy']" id="user_buy">
+        {label: "{$user_buy['nickname']}", data: {$user_buy['proportion']},color:"{$user_buy['color']}"},
+		</volist>
+        ]; 
+		$.plot('#ticket-user', data, {
+          series: {
+            pie: {
+              show: true,
+              innerRadius: 0.5,
+              shadow:{
+                top: 5,
+                left: 15,
+                alpha:0.3
+              },
+              stroke:{
+                width:0
+              },
+              label: {
+                show: false
+              },
+              highlight:{
+                opacity: 0.08
+              }
+            }
+          },
+          grid: {
+            hoverable: true,
+            clickable: true
+          },
+          legend: {
+            show: false
+          }
+        });
+	  
+	   function showTooltip(x, y, contents) {
+	      $("<div id='tooltip'>" + contents + "</div>").css({
+	        position: "absolute",
+	        display: "none",
+	        top: y + 5,
+	        left: x + 5,
+	        border: "1px solid #000",
+	        padding: "5px",
+	        'color':'#fff',
+	        'border-radius':'2px',
+	        'font-size':'11px',
+	        "background-color": "#000",
+	        opacity: 0.80
+	      }).appendTo("body").fadeIn(200);
+	    } 
+    });
+	</script>
+</block>

@@ -1,0 +1,43 @@
+一元云购系统
+
+
+运行环境：
+
+web主程序：php版本大于5.3.0 mysql
+
+程序安装完成后需要到后台配置邮件服务和阿里大鱼短信服务否则用户无法注册或是无法激活
+
+阿里大鱼短信说明
+	如果配置完成后短信无法发送请修改文件
+	Application\Home\Controller\PublicController.class.php
+	437行
+	$req = $request->setSmsTemplateCode('SMS_5235593')
+	SMS_5235593为注册验证短信模版号 修改成您的短信模版号可以在阿里大鱼后台看
+	457行
+	$req = $request->setSmsTemplateCode('SMS_5235591')
+	SMS_5235591为变更验证短信模版号 修改成您的短信模版号可以在阿里大鱼后台看
+	477行
+	$req = $request->setSmsTemplateCode('SMS_5235596')
+	SMS_5235596为身份验证验证码短信模版号 修改成您的短信模版号可以在阿里大鱼后台看
+
+
+开奖程序配置:
+
+	请先安装python2.7 如果不会安装请百度
+
+	安装完成后请安装python组件 pymysql、apscheduler
+
+	打开cmd
+
+	pip install pymysql
+	pip install apscheduler
+
+	onekaijiang目录修改config.json文件
+	配置mysql设置
+	如果不清楚已经设置好的mysql配置可以打开Application\Common\Conf\config.php查看
+
+	运行onekj.py
+	如果不会运行py文件请自己百度
+
+支付设置:
+	cacert目录为支付证书目录

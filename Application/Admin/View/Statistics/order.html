@@ -1,0 +1,95 @@
+<extend name="Public/base"/>
+<block name="style">
+	<css href="__JS__/bootstrap.datetimepicker/css/bootstrap-datetimepicker.min.css" />
+</block>
+
+<block name="body">
+	<div class="page-head">
+		<h2>订单</h2>
+	</div>
+	<div class="cl-mcont">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="block-flat">
+					<div class="header">							
+						<h3 class="hthin">{$meta_title}</h3>
+					</div>
+					<div class="content">
+						<div class="col-sm-12">
+							<form action="{:U()}" class="form-horizontal"  method="post">
+							<label class="pull-left control-label">开始日期</label>
+							<div class="col-sm-3">
+								<div class="input-group date starttime" data-min-view="2" data-date-format="yyyy-mm-dd">
+									<input type="text" name="starttime" class="form-control" value="{$Think.post.starttime|default=time_format(NOW_TIME-24*60*60*30,'Y-m-d')}"/>
+									<span class="input-group-addon btn btn-primary"><span class="glyphicon glyphicon-th"></span></span>
+								</div>
+							</div>
+							<label class="pull-left control-label">结束日期</label>
+							<div class="col-sm-3">
+								<div class="input-group date endtime" data-min-view="2" data-date-format="yyyy-mm-dd">
+									<input type="text" name="endtime" class="form-control" value="{$Think.post.endtime|default=time_format(NOW_TIME,'Y-m-d')}"/>
+									<span class="input-group-addon btn btn-primary"><span class="glyphicon glyphicon-th"></span></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<button type="submit" class="btn btn-success">确认</button>
+							</div>
+							</form>
+							<div class="pull-right">
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									选择类型 <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" role="menu">
+									<li><a href="{:U('order')}">所有类型</a></li>
+				                    <li><a href="{:U('order?recharge=0')}">购买</a></li>
+				                    <li><a href="{:U('order?recharge=1')}">充值</a></li>
+								  </ul>
+								</div>
+							</div>
+						</div>	
+						<table class="no-border blue">
+							<thead class="no-border">
+								<tr>
+									<th>时间</th>
+									<th>商品</th>
+									<th>用户名</th>
+									<th>金额</th>
+									<th>订单号</th>
+									<th>平台订单</th>
+									<th>支付</th>
+									<th>类型</th>
+								</tr>
+							</thead>
+							<tbody class="no-border-y">
+								<volist name="order" id="vo">
+								<tr>
+									<td>{:time_format($vo['create_time'])}</td>
+									<td>{$vo['shop']['name']} 第{$vo['shop']['no']}期</td>
+									<td>{:get_user_name($vo['uid'])}</td>
+									<td>￥{$vo['number']|default=0}</td>
+									<td>{$vo['order_id']}</td>
+									<td>{$vo['prepay_id']}</td>
+									<td>{:pay_state($vo['type'])}</td>
+									<td>{:pay_recharge($vo['recharge'])}</td>
+								</tr>
+								</volist>
+							</tbody>
+						</table>							
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+</block>
+<block name="script">
+	<js href="__JS__/bootstrap.datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" />
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".starttime").datetimepicker({autoclose: true,language: 'zh-CN'});
+			$(".endtime").datetimepicker({autoclose: true,language: 'zh-CN'});
+			highlight_subnav('{:U('Statistics/order')}');
+		})
+	</script>
+</block>

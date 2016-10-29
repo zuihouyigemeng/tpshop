@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" href="__IMG__/favicon.png">
+	<title>{$webtitle}--用户登陆</title>
+	<!-- Bootstrap core CSS -->
+	<css href="__JS__/bootstrap/dist/css/bootstrap.css" />
+    <css href="__FONTS__/font-awesome-4/css/font-awesome.min.css" />
+	<!-- Custom styles for this template -->
+	<css href="__CSS__/style.css" />	
+</head>
+<body class="texture">
+<div id="cl-wrapper" class="login-container">
+	<div class="middle-login">
+		<div class="block-flat">
+			<div class="header">							
+				<h3 class="text-center"><img class="logo-img" src="__IMG__/logo.png" alt="logo"/> {$webtitle}</h3>
+			</div>
+			<div>
+				<form style="margin-bottom: 0px !important;" class="form-horizontal" method="post" action="{:U()}">
+					<div class="content">
+						<h4 class="title">登 陆</h4>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-user"></i></span>
+										<input type="text" placeholder="用户名" name="username" class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+										<input type="password" placeholder="密码" name="password" class="form-control">
+									</div>
+								</div>
+							</div>
+							
+					</div>
+					<div class="foot">
+						<button class="btn btn-primary" data-dismiss="modal" type="submit">登 陆</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="text-center out-links"><a href="#">{$webtitle} &copy; 2014</a></div>
+	</div> 
+</div>
+<js href="__JS__/jquery.js" />
+<js href="__JS__/bootstrap/dist/js/bootstrap.min.js" />
+<js href="__JS__/behaviour/web.js" />
+</body>
+</html>

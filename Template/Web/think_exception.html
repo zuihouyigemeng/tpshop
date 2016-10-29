@@ -1,0 +1,41 @@
+<?php
+    if(C('LAYOUT_ON')) {
+        echo '{__NOLAYOUT__}';
+    }
+?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"></head>
+    <title>网页错误</title>
+    <style type="text/css">
+        .main-box{margin: 105px auto 0; width: 510px; padding-bottom: 65px;}
+        .main-box .main-top{}
+        .main-box .main-top .logo{width: 166px; float: left;}
+        .main-box .main-top .title{float: right;}
+        .main-box .main-top h5{font-size: 12px; font-weight: normal; margin-top: 4px; color: #999999; margin-bottom: 6px;}
+        .main-box .main-top li{background: url(/Public/Home/images/list_style.gif) 0 10px no-repeat; padding-left: 8px; line-height: 20px;}
+        .main-box .main-top .link a{text-decoration: none; margin-right: 8px; color: #0065BA;}
+        .main-box .main-top .link a:hover{color: #F00; text-decoration: none;}
+        .main-code{margin: 105px auto 0; width: 120px; padding-bottom: 65px;}
+        .main-code img{width: 120px;height: 120px;}
+    </style>
+</head>
+<body>
+  	<div class="main-box">
+	  	<div class="main-top">
+	        <div class="logo"><img src="/Public/Home/images/404.jpg"></div>
+            <div class="title">
+                <img src="/Public/Home/images/404_title.jpg">
+                <h5>您可以访问以下地址：</h5>
+                <div class="link">
+                    <a href="/">回主页</a>
+                </div>
+            </div>
+	    </div>
+	  	<div class="clear"></div>
+    </div>
+    <div class="main-code"><img src="/Public/Home/images/qrcode.jpg" /></div>
+</body></html>

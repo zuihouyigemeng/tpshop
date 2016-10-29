@@ -1,0 +1,62 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>用户</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+				<div class="header">							
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<table class="no-border blue">
+						<thead class="no-border">
+						<tr>
+							<th style="width:50%;">用户名</th>
+							<th style="width:20%;">ip</th>
+							<th style="width:20%;">登陆时间</th>
+							<th class="text-right">操作</th>
+						</tr>
+						</thead>
+						<notempty name="_list">
+						<tbody class="no-border-y">
+						<volist name="_list" id="vo">
+						<tr>
+							<td style="width:50%;">{$vo['username']}</td>
+							<td style="width:20%;">{$vo.last_login_ip|long2ip}</td>
+							<td style="width:20%;">{$vo.last_login_time|time_format=###,"Y-m-d"}</td>
+							<td class="text-right">
+								<a data-placement="left" data-toggle="tooltip" data-original-title="修改" class="label label-primary" href="{:U('password?id='.$vo['id'])}"><i class="fa fa-pencil"></i></a>
+                				<a data-placement="left" data-toggle="tooltip" data-original-title="删除" class="label label-danger ajax-get" href="{:U('del?id='.$vo['id'])}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						</volist>
+						</tbody>
+						<else/>
+						<td colspan="4"> aOh! 暂时还没有内容! </td>
+						</notempty>
+					</table>
+					<div class="content col-lg-12 pull-left">
+                        <div class="panel-foot text-center">
+                            <div class="page">{$_page}</div>
+                        </div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</block>
+<block name="script">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			highlight_subnav('{:U('Member/index')}');
+		});
+	</script>
+</block>

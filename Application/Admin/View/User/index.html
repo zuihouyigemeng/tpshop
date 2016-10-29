@@ -1,0 +1,96 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div>
+<div class="page-head">
+	<h2>用户</h2>
+</div>
+<div class="cl-mcont">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="block-flat">
+				<div class="header">							
+					<h3 class="hthin">{$meta_title}</h3>
+				</div>
+				<div class="content">
+					<div class="col-sm-12">
+						<label class="pull-left control-label">用户名称（用户ID）</label>
+						<div class="col-sm-3">
+							<input type="text" name="keyword" class="form-control">
+						</div>
+						<div class="col-sm-2">
+							<button type="button" id="search" url="{:U('')}" class="btn btn-success">搜素</button>
+						</div>
+					</div>
+					<table class="no-border blue">
+						<thead class="no-border">
+						<tr>
+							<th style="width:30%;">用户名</th>
+							<th style="width:10%;">欢乐币</th>
+							<th style="width:5%;">充值记录</th>
+							<th style="width:5%;">奖励记录</th>
+							<th style="width:10%;">购买数量</th>
+							<th style="width:10%;">中奖数量</th>
+							<th style="width:10%;">注册时间</th>
+							<th style="width:10%;">地址</th>
+							<th class="text-right">操作</th>
+						</tr>
+						</thead>
+						<notempty name="_list">
+						<tbody class="no-border-y">
+						<volist name="_list" id="vo">
+						<tr>
+							<td style="width:30%;"><img src="{$vo['headimgurl']}" class="img-thumbnail" style="height:60px;"/> {$vo['nickname']} (ID:{$vo['id']})</td>
+							<td style="width:10%;">{$vo.black}</td>
+							<td style="width:5%;"><a class="opiframe" href="#" url="{:U('User/pay?id='.$vo['id'])}" data-name="充值信息">{$vo.id|user_pay}</a></td>
+							<td style="width:5%;"><a class="opiframe" href="#" url="{:U('User/activity?id='.$vo['id'])}" data-name="奖励信息">{$vo.id|user_activity}</a></td>
+							<td style="width:10%;"><a class="opiframe" href="#" url="{:U('User/record?id='.$vo['id'])}" data-name="购买信息">{$vo.id|user_record}</a></td>
+							<td style="width:10%;"><a class="opiframe" href="#" url="{:U('User/period?id='.$vo['id'])}" data-name="中奖信息">{$vo.id|user_period}</a></td>
+							<td style="width:10%;">{$vo.create_time|time_format=###,"Y-m-d"}</td>
+							<td style="width:10%;">{$vo['province']}-{$vo['city']}</td>
+							<td class="text-right">
+								<a data-placement="left" data-toggle="tooltip" data-original-title="修改密码" class="label label-primary" href="{:U('password?id='.$vo['id'])}"><i class="fa fa-pencil"></i></a>
+								<a data-placement="left" data-toggle="tooltip" data-original-title="修改资料" class="label label-success" href="{:U('edit?id='.$vo['id'])}"><i class="fa fa-pencil-square-o"></i></a>
+                				<a data-placement="left" data-toggle="tooltip" data-original-title="删除" class="label label-danger ajax-get" href="{:U('del?id='.$vo['id'])}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						</volist>
+						</tbody>
+						<else/>
+						<td colspan="4"> aOh! 暂时还没有内容! </td>
+						</notempty>
+					</table>
+					<div class="content col-lg-12 pull-left">
+                        <div class="panel-foot text-center">
+                            <div class="page">{$_page}</div>
+                        </div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</block>
+<block name="script">
+	<js href="__JS__/behaviour/weixin.js" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			highlight_subnav('{:U('User/index')}');
+			//搜索功能
+			$("#search").click(function(){
+				var url = $(this).attr('url');
+				var query = $(this).parents().prev().children('input').serialize();
+		        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+		        query = query.replace(/^&/g,'');
+		        if( url.indexOf('?')>0 ){
+		            url += '&' + query;
+		        }else{
+		            url += '?' + query;
+		        }
+				window.location.href = url;
+			});
+		});
+	</script>
+</block>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="__IMG__/favicon.png">
+<title>购买记录</title>
+<!-- Bootstrap core CSS -->
+<css href="__JS__/bootstrap/dist/css/bootstrap.css" />
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv-printshiv.js"></script>
+    <![endif]-->
+<!-- Bootstrap core CSS -->
+<css href="__JS__/jquery.nanoscroller/nanoscroller.css" />
+<link href="__STATIC__/dist/webuploader.css" rel="stylesheet" />
+<css href="__CSS__/pygments.css" />
+<!-- Custom styles for this template -->
+<css href="__CSS__/style.css" />
+<link href="/Public/Home/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="cl-mcont block-flat">
+	<div class="gallery-cont">
+		<div class="nano nscroller has-scrollbar" style="height:550px;">
+			<div class="content">
+				<div class="tab-container">
+					<form action="{:U()}" class="form-horizontal"  method="post">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">上传图片</label>
+							<div class="col-sm-6"><div id="uploader">
+					          <div class="queueList">
+					            <div id="dndArea" class="placeholder">
+					              <div id="filePicker"></div>
+					              <p>单次最多可选10张</p>
+					            </div>
+					          </div>
+					          <div class="statusBar" style="display:none">
+					            <div class="progress">
+					              <span class="text">0%</span>
+					              <span class="percentage"></span>
+					            </div>
+					            <div class="info"></div>
+					            <div class="btns">
+					              <div id="filePicker2"></div>
+					              <div class="uploadBtn">开始上传</div>
+					            </div>
+					          </div>
+					        </div></div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">晒单心情</label>
+							<div class="col-sm-8"><textarea name="content" rows="5" class="form-control" placeholder="此刻的心情...."></textarea></div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<input name="id" type="hidden" value="{$Think.get.id}" />
+								<button class="btn btn-primary ajax-post no-refresh" type="submit" callback="express('shared_{$Think.get.id}')" target-form="form-horizontal">晒 单</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+<js href="__JS__/jquery.js" />
+<js href="__JS__/jquery.nanoscroller/jquery.nanoscroller.js" />
+<js href="__STATIC__/layer/layer.js" />
+<js href="__JS__/behaviour/web.js" />
+<js href="__JS__/bootstrap/dist/js/bootstrap.min.js" />
+<js href="__JS__/behaviour/weixin.js" />
+<js href="__STATIC__/dist/webuploader.js" />
+<js href="/Public/Home/js/upload.js" />
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".nscroller").nanoScroller();
+});
+function express(id){
+	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+	parent.$('#'+id,window.parent.document).removeClass('label-primary').addClass('label-default');
+	parent.layer.close(index); //再执行关闭    
+}
+</script>
+</html>

@@ -1,0 +1,225 @@
+/*
+	Name: Lqq_Style v1.0 -CSS Framework
+	Author: Lqq
+	Styles updated: 2014/6/23
+-------------------------------*/
+@charset "utf-8";
+body,dl,dd,ul,ol,li,h1,h2,h3,h4,form,fieldset,input,textarea,p,th,td,div{ margin:0 auto; padding:0;}
+/* CSS Document */
+.banners {
+	display: block;
+	width: 100%;
+}
+.banner1{
+	height:221px;
+	background:#911049 url("../images/banner1.jpg") center center no-repeat;
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	padding:0;
+}
+.banner2{height:181px;background:#4A2358;
+	display: block;
+	margin: 0 auto;
+	padding:0;}
+.banner3{height:208px;background:#1AA48B;
+	display: block;
+	margin: 0 auto;
+	padding:0;
+}
+
+.cent {
+	display: block;
+	width:980px;
+	position: relative;
+}
+
+
+.redme {list-style: none;text-align: left;}
+.rule .tip{width:980px;height:100px;padding-right:50px;padding-top:15px;color:#F7FFB6;font-size:14px;line-height:28px;margin-bottom: 20px;text-align: center;}
+.rule .tip em{color:#F5B900;font-weight:bold;font-size:16px;margin:0 3px;}
+/*转盘*/
+.lottery{position:absolute;bottom:2px;right:250px;width:557px;height:557px; overflow:hidden;}
+.turntable{position:absolute; width:557px; height:557px;overflow:hidden; }
+.startbutton{ width:188px; height:237px; position:absolute; left:186px; top:184px; cursor:pointer; }
+
+/*活动规则*/
+.rule{width:100%;background:#1aa48b;font-family:"微软雅黑";color:#fff;padding-top:30px}
+.rule h2{background:url("../images/rule_title.jpg") 0 0 no-repeat;width:555px;padding-left:15px;text-align:center;line-height:80px;font-size:18px;font-weight:bold;color:#bf4967;}
+.rule .content{margin:0 auto;width:800px;height:430px;}
+.rule .content .mode{padding-left:60px;width:740px;margin-bottom:5px;}
+.rule .content .mode h3{height:30px;line-height:30px;font-family:"微软雅黑";font-size:16px;}
+.rule .content .mode p{line-height:27px;font-size:14px;}
+.rule .content .mode p em{font-style:normal;color:#fff21d;}
+
+.rule .content .rule1{height:57px;background:url("../images/rule_bg.jpg") 0 0 no-repeat;}
+.rule .content .rule2{position:relative;height:138px;background:url("../images/rule_bg.jpg") 0 -57px no-repeat;}
+.rule .content .rule3{height:57px;background:url("../images/rule_bg.jpg") 0 -195px no-repeat;}
+.rule .content .rule4{height:84px;background:url("../images/rule_bg.jpg") 0 -252px no-repeat;}
+
+.rule .content .rule2 .btn{position:absolute;left:325px;top:20px;width:280px;height:60px;}
+/*活动规则结束*/
+
+.last_content{width:100%;height:auto;padding:20px 0;background:#ffc700;}
+/*积分获取方式*/
+.last_content .get_integral{margin:0 auto;margin-bottom:25px;width:850px;height:318px;font-family:"\5FAE\8F6F\96C5\9ED1";}
+.last_content .get_integral .method{float:left;padding-left:60px;padding-top:110px;width:572px;height:208px;background:url("../images/intbg.jpg") 0 0 no-repeat;line-height:30px;color:#fff;font-size:14px;}
+.last_content .get_integral .weixin{float:right;width:168px;height:93px;padding-top:75px;font-size:18px;color:#2a110d;font-family:"\957F\57CE\7C97\5706\4F53";}
+/*获奖名单*/
+.last_content .win_list{margin:0 auto;margin-bottom:70px;padding:15px 170px 70px 190px;width:537px;height:214px;padding-top:15px;background:url("../images/winlist_bg.jpg") 0 0 no-repeat;overflow:hidden;margin-top:30px;}
+.last_content .win_list .winner{width:100%;height:100%;overflow:hidden;}
+.last_content .win_list .winner ul li{overflow:hidden;height:40px;line-height:40px;color:#2a110d;font-size:16px;border-bottom:1px dashed #ccc;}
+.last_content .win_list .winner ul li span{display:block; float:left;text-align:center;}
+.last_content .win_list .winner ul li span.name{width:125px;}
+.last_content .win_list .winner ul li span.tel{width:165px;}
+.last_content .win_list .winner ul li span.result{width:247px;}
+/*精美奖品*/
+.last_content .prize{margin:0 auto;width:897px;height:auto;}
+.last_content .prize .title{width:100%;height:60px;background:url("../images/prize_title.jpg") 0 0 no-repeat;}
+.last_content .prize .content{width:775px;padding:0 52px 0 70px;height:auto;line-height:30px;background:url("../images/prize_bg.jpg") 0 0 repeat-y;font-size:16px;color:#333;}
+.last_content .prize .content ul li{background:url("../images/prize_li_bg.jpg") center bottom no-repeat;}
+.last_content .prize .content ul li.bg_none{background:none;}
+.last_content .prize .content .p1{height:30px;color:#f22a4f;font-weight:bold;}
+.last_content .prize .content .p2{height:60px;}
+.last_content .prize .content .p3{height:30px;font-size:14px;}
+.last_content .prize .content ul li p a{color:#f22a4f;text-decoration:underline;}
+
+/*联系方式输入框*/
+.suggest{display:none;z-index:100;position:fixed;_position:absolute;top:0;left:50%;margin-left:-190px;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));width:380px;height:370px;padding:30px 50px;border:8px solid #1377b5;background:#fff;font-size:16px;color:#333;}
+
+.suggest .contact{width:100%;font-size:14px;margin-bottom:15px;}
+.suggest .contact p{line-height:27px;}
+.suggest .contact .contact_input span,.suggest .contact .contact_input .addressInput span{display:block;float:left;width:60px;text-align:right;}
+.suggest .contact .contact_input .inputdiv{height:32px;line-height:32px;}
+.suggest .contact .contact_input span.input_txt{padding-left:5px;width:280px;height:30px;border:1px solid #b5b5b5;}
+.suggest .contact .contact_input span.input_txt input{border:0;outline:none;width:100%;font-size:14px;color:#333;}
+.suggest .contact .contact_input .addressInput{height:70px;}
+.suggest .contact .contact_input .addressInput .textarea{float:left;width:275px;height:60px;padding:5px;border:1px solid #b5b5b5;}
+.suggest .contact .contact_input .addressInput .textarea textarea{border:0;resize:none;outline:none;width:275px;height:60px;line-height:20px;color:#333;font-size:14px;}
+
+.suggest .send{width:100%;height:30px;}
+.suggest .send input{float:right;width:90px;height:30px;line-height:30px;text-align:center;background:#1377B5;color:#fff;font-size:16px;border:0;cursor:pointer;}
+.suggest a.suggest_close{position:absolute;top:-20px;right:-20px;display:block;width:47px;height:47px;background:url("../images/suggest_close.png") 0 0 no-repeat;}
+
+.suggest .font1{font-size:16px;font-weight:bold;}
+
+
+/* 大转盘样式 */
+.banner{display:block;width:360px;margin-left:auto;margin-right:auto;margin-bottom: 20px;margin-top:-20%}
+.banner .turnplate{display:block;width:100%;position:relative;}
+.banner .turnplate canvas.item{width:100%;}
+.banner .turnplate img.pointer{position:absolute;width:31.5%;height:42.5%;left:34.6%;top:23%;}
+
+.sy,.zzjl .title {
+	display: block;
+	width: 100%;
+	margin:0 auto;
+	height: 31px;
+	line-height: 31px;
+	margin-top: 20px;
+	font-size: 16px;
+	text-align: center;
+	color: #fff;
+}
+.center {
+	display: block;
+	position: relative;
+	width: 100%;
+	background:#691B4F;
+}
+.topimg {
+	display: block;
+	width: 100%;
+	position: relative;
+}
+.topimg .backone {
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 24px;
+	position: absolute;
+	top:0;
+	left: 10px;
+	z-index: 999;
+	color:#fff;
+	opacity: .9;
+}
+.topimg img {
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+.cenback {
+	position: fixed;
+	background:rgba(0,0,0,.7);
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	display: none;
+}
+.h4 {
+	display: block;
+	width: 90%;
+	height: 26px;
+	line-height: 26px;
+	font-size: 18px;
+	color: #fff;
+	margin:0 auto;
+}
+.zzjl {
+	display: block;
+	width: 100%;
+	background: url(../images/cenback.jpg) repeat-x top center #D02D48;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.zzjl .title {
+	padding-left: 15px;
+	text-align: left;
+}
+.zzjl dl {
+	display: block;
+	width: 90%;
+}
+.zzjl dl dd {
+	display: block;
+	width: 100%;
+	height: 26px;
+	line-height: 26px;
+	text-align: left;
+	font-size: 14px;
+	color: #fff;
+}
+.btn {
+	display: block;
+	margin: 0 auto;
+	width: 60%;
+	height: 35px;
+	line-height: 35px;
+	font-size: 18px;
+	color: #fff;
+	background: #FFCC00;
+	border-radius: 5px;
+	border:none;
+	margin-top: 15px;
+	color:#8C6900;
+	cursor: pointer;
+	text-align: center;
+}
+.red {color:#D02D48;}
+.fx {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display:block;
+	width: 100%;
+	z-index: 9999;
+}
+.fx img {
+	display:block;
+	width: 100%;
+	z-index: 9999;
+}
